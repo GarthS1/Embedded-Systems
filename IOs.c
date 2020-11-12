@@ -14,6 +14,8 @@
 int CN30Flag = 0;   //RA2 push button flag
 int CN0Flag = 0;    //RA4 push button flag
 int CN1Flag = 0;    //RB4 push button flag
+int seconds = 0;    //seconds on timer
+int minutes = 0;    //minutes on timer
 
 //This function initializes IO ports.
 void IOinit() {
@@ -41,7 +43,8 @@ void CNinit() {
 
 //Interrupt routine for _CNInterrupt
 void __attribute__((interrupt, no_auto_psv)) _CNInterrupt(void) {
-    if(IFS1bits.CNIF == 1) {
+  NewClk(32); //switch to lower clock 
+  if(IFS1bits.CNIF == 1) {
         if(PORTBbits.RB4 == 0) {
             CN1Flag = 1 - CN1Flag;  //Switch between 0 and 1. First time user presses button, change to 1, when un -presses the button flag change to 0.
         }
@@ -52,13 +55,21 @@ void __attribute__((interrupt, no_auto_psv)) _CNInterrupt(void) {
             CN30Flag = 1 - CN30Flag;
         }   
     }
-    if(CN1Flag || CN0Flag || CN30Flag)  //If any of the flag is enabled, call blinkingLed function
-        blinkingLed();
+    // Button 1 pressed call pushButton1()
+    if(CN30Flag)
+        pushButton1();
+    // Button 2 pressed call pushButton2()
+    if(CN30Flag)
+        pushButton2();
+    // Button 3 pressed call pushButton3()
+    if(CN30Flag)
+        pushButton3();
+    NewClk(8); //switch to higher clock    
     IFS1bits.CNIF = 0; //Clear CNIF Flag
     Nop();
 }
 
-void blinkingLed() {
+/*void blinkingLed() {
   // run loop unless not buttons are pressed
   while(!(PORTAbits.RA2 == 1 && PORTBbits.RB4 == 1 && PORTAbits.RA4 == 1)){
     if(PORTAbits.RA2 == 0 && PORTBbits.RB4 == 1 && PORTAbits.RA4 == 1) {  //If PB1 is pressed 
@@ -97,29 +108,5 @@ void blinkingLed() {
   CN1Flag = 0;  //reset flags
   CN0Flag = 0;
   CN30Flag = 0;
-}
-
-
-//void myIOCheck() {
-//    if(PORTAbits.RA2 == 0 && PORTBbits.RB4 == 1 && PORTAbits.RA4 == 1) {  //If PB1 is pressed 
-//        LATBbits.LATB8 = 1; //Led stays on without blinking
-//        delay_ms(1000);    //Delay 1s 
-//        LATBbits.LATB8 = 0; //Led turned off
-//        delay_ms(1000); 
-//    }else if(PORTAbits.RA4 == 0 && PORTBbits.RB4 == 1 && PORTAbits.RA2 == 1) { //IF PB2 is pressed 
-//        LATBbits.LATB8 = 1; //Led stays 
-//        delay_ms(2000);   //Delay 2s 
-//        LATBbits.LATB8 = 0; //Led turned off
-//        delay_ms(2000);   
-//    }else if(PORTBbits.RB4 == 0 && PORTAbits.RA4 == 1 && PORTAbits.RA2 == 1) {  //IF PB3 is pressed 
-//        LATBbits.LATB8 = 1; //Led stays 
-//        delay_ms(3000);   //Delay 3s 
-//        LATBbits.LATB8 = 0; //Led turned off
-//        delay_ms(3000);  
-//    }else if(PORTAbits.RA2 == 1 && PORTBbits.RB4 == 1 && PORTAbits.RA4 == 1) {  //If no button pressed 
-//        LATBbits.LATB8 = 0;  //Led turned off 
-//    }else{ //If any combination of buttons pressed
-//        LATBbits.LATB8 = 1; //Led stays on without blinking
-//    }
-//}
+}*/
 
