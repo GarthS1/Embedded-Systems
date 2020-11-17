@@ -79,6 +79,12 @@ void pushButton2() {
 
 void pushButton3() {
     int time = countTimer();
+    int timer_flag = 0;
+    
+    if(time < 3)
+        shortPresses(timer_flag);
+    else
+        resetTimer();
 }
 
 int countTimer() {
@@ -89,20 +95,32 @@ void resetTimer() {
     Disp2String("\r00m : 00s/t/t/t");  //Reset to 0.
 }
 
-void startTimer() {
-    
-}
-
-void stopTimer() {
-    
-}
-
-void shortPresses() {
-    if(CN1Flag)
+void shortPresses(int& timer_flag) {
+    timer_flag = 1 - timer_flag;
+    if(timer_flag)
         startTimer();
-    else
-        stopTimer();
 }
+
+void startTimer(int& timer_flag) {
+    while(seconds && minutes && timer_flag) {
+        Disp2String("\r"); 
+        Disp2Dec(minutes);
+        Disp2String(" : "); 
+        Disp2Dec(seconds);
+        Disp2String("\t\t\t"); 
+        seconds--;
+       if(seconds == -1 && minutes > 0) {
+           seconds = 59;
+           minutes--;
+       }
+       delay_ms(1000);
+    }
+    
+    if(seconds == 0 && minutes == 0)
+        timer_flag = 0;             //Reset timer_flag after counting down.
+}
+
+
 
 /*void blinkingLed() {
   // run loop unless not buttons are pressed
