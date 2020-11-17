@@ -69,6 +69,27 @@ void __attribute__((interrupt, no_auto_psv)) _CNInterrupt(void) {
     Nop();
 }
 
+void pushButton1() {
+    
+}
+
+void pushButton2() {
+    
+}
+
+void pushButton3() {
+    //First need to determine the duration of the hold (if <3 or >=3)
+    //Then based on the duration there will be appropriate action assigned
+}
+
+void resetTimer() {
+    Disp2String("\r00m : 00s/t/t/t");  //Reset to 0.
+}
+
+void shortPresses() {
+    //Start the count down.
+}
+
 /*void blinkingLed() {
   // run loop unless not buttons are pressed
   while(!(PORTAbits.RA2 == 1 && PORTBbits.RB4 == 1 && PORTAbits.RA4 == 1)){
