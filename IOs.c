@@ -78,16 +78,30 @@ void pushButton2() {
 }
 
 void pushButton3() {
-    //First need to determine the duration of the hold (if <3 or >=3)
-    //Then based on the duration there will be appropriate action assigned
+    int time = countTimer();
+}
+
+int countTimer() {
+    return 0;
 }
 
 void resetTimer() {
     Disp2String("\r00m : 00s/t/t/t");  //Reset to 0.
 }
 
+void startTimer() {
+    
+}
+
+void stopTimer() {
+    
+}
+
 void shortPresses() {
-    //Start the count down.
+    if(CN1Flag)
+        startTimer();
+    else
+        stopTimer();
 }
 
 /*void blinkingLed() {
