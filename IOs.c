@@ -16,7 +16,7 @@ int CN0Flag = 0;    //RA4 push button flag
 int CN1Flag = 0;    //RB4 push button flag
 int seconds = 0;    //seconds on timer
 int minutes = 0;    //minutes on timer
-
+int timer_flag = 0;
 //This function initializes IO ports.
 void IOinit() {
     AD1PCFG = 0xFFFF; // Turn all analog pins as digital
@@ -79,8 +79,6 @@ void pushButton2() {
 
 void pushButton3() {
     int time = countTimer();
-    int timer_flag = 0;
-    
     if(time < 3)
         shortPresses(timer_flag);
     else
