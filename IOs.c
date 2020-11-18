@@ -93,13 +93,13 @@ void resetTimer() {
     Disp2String("\r00m : 00s/t/t/t");  //Reset to 0.
 }
 
-void shortPresses(int& timer_flag) {
+void shortPresses() {
     timer_flag = 1 - timer_flag;
     if(timer_flag)
         startTimer();
 }
 
-void startTimer(int& timer_flag) {
+void startTimer() {
     while(seconds && minutes && timer_flag) {
         Disp2String("\r"); 
         Disp2Dec(minutes);
