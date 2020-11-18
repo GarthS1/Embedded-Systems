@@ -69,12 +69,53 @@ void __attribute__((interrupt, no_auto_psv)) _CNInterrupt(void) {
     Nop();
 }
 
-void pushButton1() {
-    
+pushBotton1()
+{
+    if(minutes==0)
+    {
+        minutes++; //increment the minute count by 1
+        displayTime(); //call displaytime function
+    }
+    delay(1000); //delay 1s
+    if(minutes<59)
+    {
+        minutes++; //increment the minute count by 1
+        displayTime();//call displaytime function
+    }
 }
 
-void pushButton2() {
-    
+pushBotton2()
+{
+    if(seconds==0)
+    {
+        seconds++; //increment the second count by 1
+        displayTime(); //call displaytime function
+    }
+    delay(1000); //delay 1s
+    if(seconds<59)
+    {
+        seconds++; //increment the second count by 1
+        displayTime(); //call displaytime function
+    }
+}
+
+displayTime()
+{
+    char message[10];
+    strcpy(message,"\r\n");
+    if(minutes<10)
+    {
+        strcat(message,"0");
+    }
+    strcat(message,(char*)&minutes);
+    strcat(message,"m:");
+    if(seconds<10)
+    {
+        strcat(message,"0");
+    }
+    strcat(message,(char*)&seconds);
+    strcat(message,"s");
+    Disp2String(message); //display string
 }
 
 void pushButton3() {
