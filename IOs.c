@@ -12,6 +12,11 @@
 #include "UART2.h"
 
 
+int seconds = 0;    //seconds on timer
+int minutes = 0;    //minutes on timer
+int countdown = 0;  //flag for countdown 
+
+
 //This function initializes IO ports.
 void IOinit() {
     AD1PCFG = 0xFFFF; // Turn all analog pins as digital
@@ -30,6 +35,7 @@ void IOinit() {
     CNinit();
 }
 
+//This function initializes Cn interrupts 
 void CNinit() {
     CNEN1bits.CN1IE = 1;    //Configure change of notification input of RB4
     CNEN1bits.CN0IE = 1;    //Configure change of notification input of RA4
@@ -40,9 +46,6 @@ void CNinit() {
     IFS1bits.CNIF = 0;      // Clear interrupt flag
 }
 
-int seconds = 0;    //seconds on timer
-int minutes = 0;    //minutes on timer
-int countdown = 0;  //flag for countdown 
 //CN interrupt routine 
 void IOcheck()
 {
@@ -52,11 +55,11 @@ void IOcheck()
     
     while(PORTAbits.RA2 == 0 && PORTBbits.RB4 == 1 && PORTAbits.RA4 == 1)   //If PB1 is pressed 
     {
-        countdown = 0;
+        countdown = 0;    //disable countdown
         if(minutes<59)
         {
-            minutes++; //increment the minute count by 1
-            displayTime();//call displaytime function
+            minutes++;       //increment the minute count by 1
+            displayTime();  //call displaytime function
         }
         delay_ms(1000, 1);   // 1 sec delay
         
@@ -64,37 +67,37 @@ void IOcheck()
     
     while(PORTAbits.RA4 == 0 && PORTBbits.RB4 == 1 && PORTAbits.RA2 == 1)  //IF PB2 is pressed 
     {   
-        countdown = 0;
+        countdown = 0;    //disable countdown
         if(minutes<59)
         {
-            seconds++; //increment the minute count by 1
-            displayTime();//call displaytime function
+            seconds++;        //increment the second count by 1
+            displayTime();    //call displaytime function
         }  
         delay_ms(1000, 1);   // 1 sec delay
     }
     
-    int timePB3 = 0;
-    int PB3flag = 0;
+    int timePB3 = 0;  //keeps track of how long PB3 has been pushed down
+    int PB3flag = 0;  //flag for button 3
     while(PORTBbits.RB4 == 0 && PORTAbits.RA4 == 1 && PORTAbits.RA2 == 1)   //IF PB3 is pressed 
     {   
-        PB3flag = 1;     //Flag for PB3
+        PB3flag = 1;         //Enable flag for PB3
         delay_ms(1000, 1);   // 1 sec delay
-        timePB3++;
+        timePB3++;           //Increment timer
     }
     
     if(PB3flag)
     {
-        if(timePB3 >= 3)
+        if(timePB3 >= 3) //If button has been pushed down for greater then 3 seconds 
         {
-            countdown = 0;
+            //Reset timer and display
+            countdown = 0; 
             seconds = 0;
             minutes = 0;
-            delay_ms(1000, 1);   // 1 sec delay
             displayTime();
         }
-        else
+        else  //Button pushed for less then 3 seconds 
         {
-          countdown = 1 - countdown;
+          countdown = 1 - countdown;  //Start or pause countdown depending on previous state 
         }
     }
 }
@@ -102,7 +105,6 @@ void IOcheck()
 //Interrupt routine for _CNInterrupt
 void __attribute__((interrupt, no_auto_psv)) _CNInterrupt(void)
 {
-    //CNflag = 1;  // global user defined flag - use only if needed
     IFS1bits.CNIF = 0;		// clear IF flag
     T2CONbits.TON = 0;    // Disable timer
     IEC0bits.T2IE = 0;    //Disable timer interrupt
@@ -110,34 +112,40 @@ void __attribute__((interrupt, no_auto_psv)) _CNInterrupt(void)
     Nop();	 
 }
 
+//Function to show timer if set 
 void counterdownTimer() {
   if(countdown){
-    if(seconds==0 && minutes ==0){
+    if(seconds==0 && minutes ==0){ //Timer done
         alarm();
         countdown = 0;
-        LATBbits.LATB8 = 0;
+        LATBbits.LATB8 = 1; //Turn LED on 
     }
-    else if(seconds==0){
-        minutes--;
-        seconds = 59;
+    else //Timer on
+    {   
+        //Calculate time left 
+        if(seconds==0){
+          minutes--;
+          seconds = 59;
+        }
+        else{
+          seconds--;
+        }
+        
+        delay_ms(1000, 1);   // 1 sec delay
         displayTime();
+        LATBbits.LATB8 = 1  - LATBbits.LATB8; //Blink LED
     }
-    else
-    {
-        seconds--;
-        displayTime();
-    }
-        LATBbits.LATB8 = 1  - LATBbits.LATB8; //Led blinked
   } 
-  delay_ms(1000, 1);
 }
 
+//Show alarm message
 void alarm(){
     NewClk(8); 
     Disp2String("\r Alarm                      ");
     NewClk(32);
 }
 
+//Display how much time is left 
 void displayTime(){
     NewClk(8); 
     Disp2String("\r");
