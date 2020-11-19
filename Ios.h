@@ -12,5 +12,14 @@ void IOcheck(void);
 void CNinit(void);
 
 void blinkingLed(void);
-#endif	/* XC_HEADER_TEMPLATE_H */
 
+void pushButton1();
+
+void pushButton2();
+
+void pushButton3();
+
+void displayTime();
+
+void alarm();
+#endif	/* XC_HEADER_TEMPLATE_H */
