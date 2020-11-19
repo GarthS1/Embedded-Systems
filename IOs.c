@@ -11,22 +11,22 @@
 #include "TimeDelay.h"
 #include "UART2.h"
 
-int CN30Flag = 0;   //RA2 push button flag
-int CN0Flag = 0;    //RA4 push button flag
-int CN1Flag = 0;    //RB4 push button flag
-int seconds = 0;    //seconds on timer
-int minutes = 0;    //minutes on timer
 
 //This function initializes IO ports.
 void IOinit() {
     AD1PCFG = 0xFFFF; // Turn all analog pins as digital
+    
     TRISBbits.TRISB8 = 0; //RB8 is output.
+    LATBbits.LATB8 = 0; // Make GPIO RB8 as a digital output
+    
     CNPU1bits.CN0PUE = 1; //Enables pull up resistor on RA4/CN0
     CNPU2bits.CN30PUE = 1; //Enables pull up resistor on RA2/CN3
     CNPU1bits.CN1PUE = 1; //Enables pull up resistor on RB4/CN1
+    
     TRISAbits.TRISA2 = 1; //RA2 is input, PB1 is connected to this port.
     TRISAbits.TRISA4 = 1; //RA4 is input, PB2 is connected to this port.
     TRISBbits.TRISB4 = 1; //RB4 is input, PB3 is connected to this port
+    
     CNinit();
 }
 
@@ -34,40 +34,213 @@ void CNinit() {
     CNEN1bits.CN1IE = 1;    //Configure change of notification input of RB4
     CNEN1bits.CN0IE = 1;    //Configure change of notification input of RA4
     CNEN2bits.CN30IE = 1;   //Configure change of notification input of RA2
+    
+    IPC4bits.CNIP0 = 6;     //Change in IO Notifcation priority 6.
     IEC1bits.CNIE = 1;      //Set interrupt request to occur
-    IPC4bits.CNIP0 = 0;         
-    IPC4bits.CNIP1 = 1;
-    IPC4bits.CNIP2 = 1;     //Change in IO Notifcation priority 6.
+    IFS1bits.CNIF = 0;      // Clear interrupt flag
 }
 
+int seconds = 0;    //seconds on timer
+int minutes = 0;    //minutes on timer
+int countdown = 0;  //flag for countdown 
+//CN interrupt routine 
+void IOcheck()
+{
+    IEC1bits.CNIE = 0; //disable CN interrupts to avoid debounces
+    delay_ms(400, 1);   // 400 msec delay to filter out debounces 
+    IEC1bits.CNIE = 1; //Enable CN interrupts to detect pb release
+    
+    while(PORTAbits.RA2 == 0 && PORTBbits.RB4 == 1 && PORTAbits.RA4 == 1)   //If PB1 is pressed 
+    {
+        countdown = 0;
+        if(minutes<59)
+        {
+            minutes++; //increment the minute count by 1
+            displayTime();//call displaytime function
+        }
+        delay_ms(1000, 1);   // 1 sec delay
+        
+    }
+    
+    while(PORTAbits.RA4 == 0 && PORTBbits.RB4 == 1 && PORTAbits.RA2 == 1)  //IF PB2 is pressed 
+    {   
+        countdown = 0;
+        if(minutes<59)
+        {
+            seconds++; //increment the minute count by 1
+            displayTime();//call displaytime function
+        }  
+        delay_ms(1000, 1);   // 1 sec delay
+    }
+    
+    int timePB3 = 0;
+    int PB3flag = 0;
+    while(PORTBbits.RB4 == 0 && PORTAbits.RA4 == 1 && PORTAbits.RA2 == 1)   //IF PB3 is pressed 
+    {   
+        PB3flag = 1;     //Flag for PB3
+        delay_ms(1000, 1);   // 1 sec delay
+        timePB3++;
+    }
+    
+    if(PB3flag)
+    {
+        if(timePB3 >= 3)
+        {
+            countdown = 0;
+            seconds = 0;
+            minutes = 0;
+            delay_ms(1000, 1);   // 1 sec delay
+            displayTime();
+        }
+        else
+        {
+          countdown = 1 - countdown;
+        }
+    }
+}
 
 //Interrupt routine for _CNInterrupt
-void __attribute__((interrupt, no_auto_psv)) _CNInterrupt(void) {
-  NewClk(32); //switch to lower clock 
-  if(IFS1bits.CNIF == 1) {
-        if(PORTBbits.RB4 == 0) {
-            CN1Flag = 1 - CN1Flag;  //Switch between 0 and 1. First time user presses button, change to 1, when un -presses the button flag change to 0.
-        }
-        if(PORTAbits.RA4 == 0) {
-            CN0Flag = 1 - CN0Flag;
-        }
-        if(PORTAbits.RA2 == 0) {
-            CN30Flag = 1 - CN30Flag;
-        }   
-    }
-    // Button 1 pressed call pushButton1()
-    if(CN30Flag)
-        pushButton1();
-    // Button 2 pressed call pushButton2()
-    if(CN30Flag)
-        pushButton2();
-    // Button 3 pressed call pushButton3()
-    if(CN30Flag)
-        pushButton3();
-    NewClk(8); //switch to higher clock    
-    IFS1bits.CNIF = 0; //Clear CNIF Flag
-    Nop();
+void __attribute__((interrupt, no_auto_psv)) _CNInterrupt(void)
+{
+    //CNflag = 1;  // global user defined flag - use only if needed
+    IFS1bits.CNIF = 0;		// clear IF flag
+    T2CONbits.TON = 0;    // Disable timer
+    IEC0bits.T2IE = 0;    //Disable timer interrupt
+    IOcheck();
+    Nop();	 
 }
+
+void counterdownTimer() {
+  if(countdown){
+    if(seconds==0 && minutes ==0){
+        alarm();
+        countdown = 0;
+        LATBbits.LATB8 = 0;
+    }
+    else if(seconds==0){
+        minutes--;
+        seconds = 59;
+        displayTime();
+    }
+    else
+    {
+        seconds--;
+        displayTime();
+    }
+        LATBbits.LATB8 = 1  - LATBbits.LATB8; //Led blinked
+  } 
+  delay_ms(1000, 1);
+}
+
+void alarm(){
+    NewClk(8); 
+    Disp2String("\r Alarm                      ");
+    NewClk(32);
+}
+
+void displayTime(){
+    NewClk(8); 
+    Disp2String("\r");
+    Disp2Dec(minutes);
+    Disp2String("m : ");
+    Disp2Dec(seconds);
+    Disp2String("s");
+    NewClk(32);
+}
+/*
+int CN30Flag = 0;   //RA2 push button flag
+int CN0Flag = 0;    //RA4 push button flag
+int CN1Flag = 0;    //RB4 push button flag
+int seconds = 0;    //seconds on timer
+int minutes = 0;    //minutes on timer
+int timer_flag = 0;
+void pushButton1()
+{
+    if(minutes==0)
+    {
+        minutes++; //increment the minute count by 1
+        displayTime(); //call displaytime function
+    }
+    delay_ms(1000); //delay 1s
+    if(minutes<59)
+    {
+        minutes++; //increment the minute count by 1
+        displayTime();//call displaytime function
+    }
+}
+
+void pushButton2()
+{
+    if(seconds==0)
+    {
+        seconds++; //increment the second count by 1
+        displayTime(); //call displaytime function
+    }
+    delay_ms(1000); //delay 1s
+    if(seconds<59)
+    {
+        seconds++; //increment the second count by 1
+        displayTime(); //call displaytime function
+    }
+}
+
+
+
+void pushButton3() {
+    int time = countTimer();
+    if(time < 3)
+        shortPresses(timer_flag);
+    else
+        resetTimer();
+}
+
+
+void displayTime(){
+  Disp2String("\r")
+  Disp2Dec(minutes);
+  Disp2String("m : ");
+  Disp2Dec(seconds);
+  Disp2String("s");
+}
+void counterdownTimer() {
+  if(timer){
+    displayTime();
+    delay_ms(1000);  
+    minutes --;
+    seconds --;
+  } 
+}
+
+void resetTimer() {
+    Disp2String("\r00m : 00s/t/t/t");  //Reset to 0.
+}
+
+void shortPresses() {
+    timer_flag = 1 - timer_flag;
+    if(timer_flag)
+        startTimer();
+}
+
+void startTimer() {
+    while(seconds && minutes && timer_flag) {
+        Disp2String("\r"); 
+        Disp2Dec(minutes);
+        Disp2String(" : "); 
+        Disp2Dec(seconds);
+        Disp2String("\t\t\t"); 
+        seconds--;
+       if(seconds == -1 && minutes > 0) {
+           seconds = 59;
+           minutes--;
+       }
+       delay_ms(1000);
+    }
+    
+    if(seconds == 0 && minutes == 0)
+        timer_flag = 0;             //Reset timer_flag after counting down.
+}
+*/
+
 
 /*void blinkingLed() {
   // run loop unless not buttons are pressed
@@ -109,4 +282,3 @@ void __attribute__((interrupt, no_auto_psv)) _CNInterrupt(void) {
   CN0Flag = 0;
   CN30Flag = 0;
 }*/
-
