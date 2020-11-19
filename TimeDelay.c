@@ -2,50 +2,36 @@
 #include <xc.h>
 #include <stdio.h>
 
-// User delay function for LED's 
-void delay_ms(uint16_t time_ms)
-{ 
-    NewClk(32);         //Configure clock 
-    T2CON = 0;          //CLEAR T2CON.
-    TMR2 = 0;           //CLEAR THE TIMER
+void delay_ms(uint16_t time_ms, uint8_t idle_on)
+{
+    //T2CON config
+    T2CONbits.TSIDL = 0; //operate in idle mode
+    T2CONbits.T32 = 0; // operate timer 2 as 16 bit timer
+    T2CONbits.TCS = 0; // use internal clock
+    // T2CONbits.TGATE = 0;
     
-    IFS0bits.T2IF = 0;   //Clear timer 2 interrupt flag
-    T2CONbits.TCS = 0;   //Use FOSC INTERNAL CLOCK
-    T2CONbits.T32 = 0;   //Use 16 bit timer
-    T2CONbits.TSIDL = 0; //Continue module operation in idle mode
+    // Timer 2 interrupt config
+    IPC1bits.T2IP = 2; //7 is highest and 1 is lowest priority
+    IEC0bits.T2IE = 1; //enable timer interrupt
+    IFS0bits.T2IF = 0; // Clear timer 2 flaf
     
-    //Prescaler to 8
-    T2CONbits.TCKPS0 = 1;  
-    T2CONbits.TCKPS1 = 0;
+    PR2 = time_ms << 4; //After PR2 simplification
+    TMR2 = 0;
+    T2CONbits.TON = 1; //start timer
     
-    //Set interrupt priority to 1
-    IPC1bits.T2IP2 = 1;
-    IPC1bits.T2IP1 = 1;
-    IPC1bits.T2IP0 = 1;  
-     
-    PR2 = 2 * time_ms ;     
-    
-    /*
-     * 2 multiply time_ms because:
-     * Frequency for the clock is 32000 Hz
-     * Prescaler as set above is 8
-     * We have formula:
-     * PR2 * Prescaler * 2/(clock_frequency) = desired time in second
-     * In our case:
-     * PR2 * time_ms * Prescaler * 2/clock_frequency * 1000 = desired time in ms
-     * For each second we have:
-     * (PR2 * 1000 ms) * 8 * 2 / 32000 * 1000 = 1000ms
-     * -> PR2 = 2;
-     */
-    
-    IEC0bits.T2IE = 1;   //Enable timer interrupt.
-    T2CONbits.TON = 1;  //Enable timer.
-    Idle();             //Stay here until interrupt trigger.
+    if(idle_on == 1)
+    {
+        Idle(); 
+    }
+    T2CONbits.TON=0; // Stop timer
+    return;
 }
 
-// Interrupt function for timer 2
+// Used in HW IO control Driver project 3
 void __attribute__((interrupt, no_auto_psv)) _T2Interrupt(void)
-  {
-    IFS0bits.T2IF = 0; //Clear timer 2 interrupt flag 
-    T2CONbits.TON = 0; //Disable the timer
- }
+{
+     IFS0bits.T2IF=0; //Clear timer 2 interrupt flag
+    
+    // TMR2flag = 1; // optional global variable created by user
+    return;
+}
