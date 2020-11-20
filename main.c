@@ -32,6 +32,7 @@ int main(void) {
      
     while(1)
     {
+      counterdownTimer(); //shows countdown timer
     }
         
     return 0;
