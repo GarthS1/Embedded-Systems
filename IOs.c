@@ -56,7 +56,7 @@ void IOcheck()
     while(PORTAbits.RA2 == 0 && PORTBbits.RB4 == 1 && PORTAbits.RA4 == 1)   //If PB1 is pressed 
     {
         countdown = 0;    //disable countdown
-        if(minutes<59)
+        if(minutes < 59)
         {
             minutes++;       //increment the minute count by 1
             displayTime();  //call displaytime function
@@ -115,15 +115,15 @@ void __attribute__((interrupt, no_auto_psv)) _CNInterrupt(void)
 //Function to show timer if set 
 void counterdownTimer() {
   if(countdown){
-    if(seconds==0 && minutes ==0){ //Timer done
+    if(seconds == 0 && minutes == 0){ //Timer done
         alarm();
-        countdown = 0;
+        countdown = 0;      
         LATBbits.LATB8 = 1; //Turn LED on 
     }
     else //Timer on
-    {   
+    {
         //Calculate time left 
-        if(seconds==0){
+        if(seconds == 0){
           minutes--;
           seconds = 59;
         }
@@ -139,14 +139,15 @@ void counterdownTimer() {
 }
 
 //Show alarm message
-void alarm(){
+void alarm() {
     NewClk(8); 
-    Disp2String("\r Alarm                      ");
+    displayTime();
+    Disp2String("Alarm                      ");
     NewClk(32);
 }
 
 //Display how much time is left 
-void displayTime(){
+void displayTime() {
     NewClk(8); 
     Disp2String("\r");
     Disp2Dec(minutes);
@@ -155,138 +156,4 @@ void displayTime(){
     Disp2String("s");
     NewClk(32);
 }
-/*
-int CN30Flag = 0;   //RA2 push button flag
-int CN0Flag = 0;    //RA4 push button flag
-int CN1Flag = 0;    //RB4 push button flag
-int seconds = 0;    //seconds on timer
-int minutes = 0;    //minutes on timer
-int timer_flag = 0;
-void pushButton1()
-{
-    if(minutes==0)
-    {
-        minutes++; //increment the minute count by 1
-        displayTime(); //call displaytime function
-    }
-    delay_ms(1000); //delay 1s
-    if(minutes<59)
-    {
-        minutes++; //increment the minute count by 1
-        displayTime();//call displaytime function
-    }
-}
 
-void pushButton2()
-{
-    if(seconds==0)
-    {
-        seconds++; //increment the second count by 1
-        displayTime(); //call displaytime function
-    }
-    delay_ms(1000); //delay 1s
-    if(seconds<59)
-    {
-        seconds++; //increment the second count by 1
-        displayTime(); //call displaytime function
-    }
-}
-
-
-
-void pushButton3() {
-    int time = countTimer();
-    if(time < 3)
-        shortPresses(timer_flag);
-    else
-        resetTimer();
-}
-
-
-void displayTime(){
-  Disp2String("\r")
-  Disp2Dec(minutes);
-  Disp2String("m : ");
-  Disp2Dec(seconds);
-  Disp2String("s");
-}
-void counterdownTimer() {
-  if(timer){
-    displayTime();
-    delay_ms(1000);  
-    minutes --;
-    seconds --;
-  } 
-}
-
-void resetTimer() {
-    Disp2String("\r00m : 00s/t/t/t");  //Reset to 0.
-}
-
-void shortPresses() {
-    timer_flag = 1 - timer_flag;
-    if(timer_flag)
-        startTimer();
-}
-
-void startTimer() {
-    while(seconds && minutes && timer_flag) {
-        Disp2String("\r"); 
-        Disp2Dec(minutes);
-        Disp2String(" : "); 
-        Disp2Dec(seconds);
-        Disp2String("\t\t\t"); 
-        seconds--;
-       if(seconds == -1 && minutes > 0) {
-           seconds = 59;
-           minutes--;
-       }
-       delay_ms(1000);
-    }
-    
-    if(seconds == 0 && minutes == 0)
-        timer_flag = 0;             //Reset timer_flag after counting down.
-}
-*/
-
-
-/*void blinkingLed() {
-  // run loop unless not buttons are pressed
-  while(!(PORTAbits.RA2 == 1 && PORTBbits.RB4 == 1 && PORTAbits.RA4 == 1)){
-    if(PORTAbits.RA2 == 0 && PORTBbits.RB4 == 1 && PORTAbits.RA4 == 1) {  //If PB1 is pressed 
-        Disp2String("\rPB1 is pressed           ");
-        LATBbits.LATB8 = 1; //Led stays on without blinking
-        delay_ms(500);    //Delay 500ms 
-        LATBbits.LATB8 = 0; //Led turned off
-        delay_ms(500); 
-    }else if(PORTAbits.RA4 == 0 && PORTBbits.RB4 == 1 && PORTAbits.RA2 == 1) { //IF PB2 is pressed 
-        Disp2String("\rPB2 is pressed        ");
-        LATBbits.LATB8 = 1; //Led stays 
-        delay_ms(2000);   //Delay 2s 
-        LATBbits.LATB8 = 0; //Led turned off
-        delay_ms(2000);   
-    }else if(PORTBbits.RB4 == 0 && PORTAbits.RA4 == 1 && PORTAbits.RA2 == 1) {  //IF PB3 is pressed 
-        Disp2String("\rPB3 is pressed        ");
-        LATBbits.LATB8 = 1; //Led stays 
-        delay_ms(3000);   //Delay 3s 
-        LATBbits.LATB8 = 0; //Led turned off
-        delay_ms(3000);  
-    }else{ //If any combination of buttons pressed
-        if(!PORTAbits.RA2 && !PORTAbits.RA4 && !PORTBbits.RB4 ) {
-            Disp2String("\rAll PBs pressed       ");
-        } else if(!PORTAbits.RA2) {
-            Disp2String("\rPB1 and PB3 are pressed          ");
-        }else if(!PORTAbits.RA4) {
-            Disp2String("\rPB2 and PB3 are pressed          ");
-        } else if(!PORTBbits.RB4) {
-            Disp2String("\rPB1 and PB2 are pressed           ");
-        }
-        LATBbits.LATB8 = 1; //Led stays on without blinking
-    }
-  }
-  Disp2String("\rNothing pressed             ");
-  LATBbits.LATB8 = 0;  //Led turned off 
-  CN1Flag = 0;  //reset flags
-  CN0Flag = 0;
-  CN30Flag = 0;
-}*/
