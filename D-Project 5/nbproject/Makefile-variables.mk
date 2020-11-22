@@ -6,8 +6,8 @@
 CND_BASEDIR=`pwd`
 # default configuration
 CND_ARTIFACT_DIR_default=dist/default/production
-CND_ARTIFACT_NAME_default=D-PROJECT_5.X.production.hex
-CND_ARTIFACT_PATH_default=dist/default/production/D-PROJECT_5.X.production.hex
+CND_ARTIFACT_NAME_default=D-Project_5.production.hex
+CND_ARTIFACT_PATH_default=dist/default/production/D-Project_5.production.hex
 CND_PACKAGE_DIR_default=${CND_DISTDIR}/default/package
-CND_PACKAGE_NAME_default=d-project5.x.tar
-CND_PACKAGE_PATH_default=${CND_DISTDIR}/default/package/d-project5.x.tar
+CND_PACKAGE_NAME_default=d-project5.tar
+CND_PACKAGE_PATH_default=${CND_DISTDIR}/default/package/d-project5.tar
