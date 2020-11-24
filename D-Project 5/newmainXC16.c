@@ -9,6 +9,7 @@
 #include "xc.h"
 #include "ChangeClk.h"
 #include "ADC.h"
+#include "UART2.h"
 
 int main(void) {
     NewClk(32);     //Use system clock 32kHz
