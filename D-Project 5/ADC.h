@@ -28,8 +28,8 @@
 
 // This is a guard condition so that contents of this file are not included
 // more than once.  
-#ifndef XC_HEADER_TEMPLATE_H
-#define	XC_HEADER_TEMPLATE_H
+#ifndef ADC_H
+#define	ADC_H
 
 #include <xc.h> // include processor files - each processor file is guarded.  
 
@@ -42,7 +42,7 @@ extern "C" {
 
 #ifdef	__cplusplus
 }
-#endif /* __cplusplus */
+#endif 
 
-#endif	/* XC_HEADER_TEMPLATE_H */
+#endif	
 
