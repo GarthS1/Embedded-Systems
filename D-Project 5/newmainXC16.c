@@ -27,24 +27,30 @@
 
 
 void displayADC(uint16_t value) {
-	uint16_t size = value / 30; //Since the adc value can be big, we divide the value by 30 to display in one line
-	char result[size];  //number of needed character to write
-	char clear[size];   //number of needed character to clear the write
+    if(value == 0) {
+        uint16_t size = value / 30; //Since the adc value can be big, we divide the value by 30 to display in one line
+        char result[size];  //number of needed character to write
+        char clear[size];   //number of needed character to clear the write
 
-    int i = 0;
-    while(i < size - 1) { //Populate two arrays
-        result[i] = '*';    //Populate first array with *
-		clear[i] = ' ';     //Populate clear array with empty character
-        i++;
+        int i = 0;
+         while(i < size - 1) { //Populate two arrays
+            result[i] = '*';    //Populate first array with *
+            clear[i] = ' ';     //Populate clear array with empty character
+            i++;
+        }
+        result[size - 1] = '\0';    //Null terminator at the end of the string
+        clear[size - 1] = '\0';  
+        Disp2String("\r");  //Start writing the value  
+        Disp2String(result);    //Display the bar graph
+        Disp2Hex(value);    //Display the value in hex from unint16_t 
+        Disp2String("\r");  //Start clearing written value
+        Disp2String(clear); //Clear character
+        Disp2String("                ");    //Clear hex character at the end
+    } else {
+        Disp2String("\r");  //Start writing the value  
+        Disp2Hex(value);    //Display the value in hex from unint16_t
+        Disp2String("                ");    //Clear hex character at the end
     }
-    result[size - 1] = '\0';    //Null terminator at the end of the string
-    clear[size - 1] = '\0';     
-	Disp2String("\r");  //Start writing the value  
-	Disp2String(result);    //Display the bar graph
-	Disp2Hex(value);    //Display the value in hex from unint16_t 
-	Disp2String("\r");  //Start clearing written value
-	Disp2String(clear); //Clear character
-	Disp2String("                ");    //Clear hex character at the end
 }
 
 int main(void) {
