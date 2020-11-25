@@ -32,12 +32,13 @@ void displayADC(uint16_t value) {
 	char clear[size];   //number of needed character to clear the write
 
     int i = 0;
-    while(i < size) { //Populate two arrays
+    while(i < size - 1) { //Populate two arrays
         result[i] = '*';    //Populate first array with *
 		clear[i] = ' ';     //Populate clear array with empty character
         i++;
     }
-
+    result[size - 1] = '\0';    //Null terminator at the end of the string
+    clear[size - 1] = '\0';     
 	Disp2String("\r");  //Start writing the value  
 	Disp2String(result);    //Display the bar graph
 	Disp2Hex(value);    //Display the value in hex from unint16_t 
