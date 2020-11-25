@@ -27,7 +27,7 @@
 
 
 void displayADC(uint16_t value) {
-    if(value == 0) {
+    if(value != 0) {
         uint16_t size = value / 30; //Since the adc value can be big, we divide the value by 30 to display in one line
         char result[size];  //number of needed character to write
         char clear[size];   //number of needed character to clear the write
