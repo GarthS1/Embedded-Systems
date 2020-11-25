@@ -25,6 +25,27 @@
 #define Idle() {__asm__ volatile ("pwrsav #1");}    //Idle() - put MCU in idle mode - only CPU off
 #define dsen() {__asm__ volatile ("BSET DSCON, #15");} //
 
+
+void displayADC(uint16_t value) {
+	uint16_t size = value / 30; //Since the adc value can be big, we divide the value by 30 to display in one line
+	char result[size];  //number of needed character to write
+	char clear[size];   //number of needed character to clear the write
+
+    int i = 0;
+    while(i < size) { //Populate two arrays
+        result[i] = '*';    //Populate first array with *
+		clear[i] = ' ';     //Populate clear array with empty character
+        i++;
+    }
+
+	Disp2String("\r");  //Start writing the value  
+	Disp2String(result);    //Display the bar graph
+	Disp2Hex(value);    //Display the value in hex from unint16_t 
+	Disp2String("\r");  //Start clearing written value
+	Disp2String(clear); //Clear character
+	Disp2String("                ");    //Clear hex character at the end
+}
+
 int main(void) {
     NewClk(32);     //Use system clock 32kHz
     TRISAbits.TRISA3 = 1; //Enable RA3 as ADC input 
@@ -32,9 +53,7 @@ int main(void) {
     InitUART2();   //Initialize UART2
          
     while(1) {
-        Disp2String("\r");
-        Disp2Dec(do_ADC());
-        Disp2String("      ");
+        displayADC(do_ADC());
     }
     
     return 0;
