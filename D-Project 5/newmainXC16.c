@@ -49,6 +49,7 @@ void displayADC(uint16_t value) {
     } else {
         Disp2String("\r");  //Start writing the value  
         Disp2Hex(value);    //Display the value in hex from unint16_t
+        Disp2String("\r");  //Start clearing written value
         Disp2String("                ");    //Clear hex character at the end
     }
 }
