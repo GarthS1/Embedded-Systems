@@ -8,6 +8,11 @@
 
 #include "xc.h"
 
+#pragma config FCKSM = CSECMD // Clock switching is enabled, clock monitor disabled
+#pragma config OSCIOFNC = ON //CLKO output disabled on pin 8, use as IO.
+
+
+
 int main(void) {
     return 0;
 }
