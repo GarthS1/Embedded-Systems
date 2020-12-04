@@ -26,40 +26,13 @@
 #define dsen() {__asm__ volatile ("BSET DSCON, #15");} //
 
 
-void displayADC(uint16_t value) {
-    if(value >= 30) {
-        uint16_t size = value / 30; //Since the adc value can be big, we divide the value by 30 to display in one line
-        char result[size];  //number of needed character to write
-        char clear[size];   //number of needed character to clear the write
-
-        int i = 0;
-         while(i < size - 1) { //Populate two arrays
-            result[i] = '*';    //Populate first array with *
-            clear[i] = ' ';     //Populate clear array with empty character
-            i++;
-        }
-        result[size - 1] = '\0';    //Null terminator at the end of the string
-        clear[size - 1] = '\0';  
-        Disp2String("\r");  //Start writing the value  
-        Disp2String(result);    //Display the bar graph
-        Disp2Hex(value);    //Display the value in hex from unint16_t 
-        Disp2String("\r");  //Start clearing written value
-        Disp2String(clear); //Clear character
-        Disp2String("                ");    //Clear hex character at the end
-    } else {
-        Disp2String("\r");  //Start writing the value  
-        Disp2Hex(value);    //Display the value in hex from unint16_t
-        Disp2String("\r                ");  //Clearing written value
-    }
-}
-
 int main(void) {
     NewClk(32);     //Use system clock 32kHz
     TRISAbits.TRISA3 = 1; //Enable RA3 as ADC input 
     InitUART2();   //Initialize UART2
-         
+    init_do_ADC();
+    
     while(1) {
-        displayADC(do_ADC());
     }
     
     return 0;

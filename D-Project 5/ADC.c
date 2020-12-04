@@ -8,8 +8,10 @@
 
 #include "xc.h"
 #include "ADC.h"
+#include "UART2.h"
+#include "ChangeClk.h"
 
-uint16_t do_ADC(void) {
+void init_do_ADC(void) {
     AD1CON1bits.ADON = 1; //Enable ADC module
     
     AD1CON1bits.FORM0 = 0;
@@ -22,7 +24,11 @@ uint16_t do_ADC(void) {
     AD1CON2bits.VCFG = 0b000;   //Voltage reference configuration bits VR+ = AVDD, VR- = AVSS
     AD1CON2bits.CSCNA = 0;      //Do not scan input
     
-//    AD1CON2bits.SMPI = 0b0000; //Only if you want to use interrupt
+    AD1CON2bits.SMPI = 0b0000; //Only if you want to use interrupt
+    IPC3bits.AD1IP = 5;         //Priority level for interrupt
+    IEC0bits.AD1IE = 1;         //Enable adc interrupt
+    
+    
     AD1CON2bits.BUFM = 0;   //Enable 16-word buffer
     AD1CON2bits.ALTS = 0;   //Always uses MUX A input multiplexer settings
     
@@ -48,13 +54,41 @@ uint16_t do_ADC(void) {
     
     
     AD1CON1bits.SAMP = 1;
-    while(!AD1CON1bits.DONE) {}
-    
-    uint16_t value = ADC1BUF0;  //SAVE ADC1BUF0 output to value
-    AD1CON1bits.SAMP = 0;       //Stop sampling
-    AD1CON1bits.ADON = 0;       //Turn off ADC
-    
-    return value;
 }
+
+void __attribute__((interrupt, no_auto_psv)) _ADC1Interrupt(void) {
+    IFS0bits.AD1IF = 0; //Clear interrupt flag
+    displayADC(ADC1BUF0);   //Display ADC value
+}   
+
+void displayADC(uint16_t value) {
+    if(value >= 30) {
+        uint16_t size = value / 30; //Since the adc value can be big, we divide the value by 30 to display in one line
+        char result[size];  //number of needed character to write
+        char clear[size];   //number of needed character to clear the write
+
+        int i = 0;
+         while(i < size - 1) { //Populate two arrays
+            result[i] = '*';    //Populate first array with *
+            clear[i] = ' ';     //Populate clear array with empty character
+            i++;
+        }
+        result[size - 1] = '\0';    //Null terminator at the end of the string
+        clear[size - 1] = '\0';  
+        Disp2String("\r");  //Start writing the value  
+        Disp2String(result);    //Display the bar graph
+        Disp2Hex(value);    //Display the value in hex from unint16_t 
+        Disp2String("\r");  //Start clearing written value
+        Disp2String(clear); //Clear character
+        Disp2String("                ");    //Clear hex character at the end
+    } else {
+        Disp2String("\r");  //Start writing the value  
+        Disp2Hex(value);    //Display the value in hex from unint16_t
+        Disp2String("\r                ");  //Clearing written value
+    }
+}
+
+
+
 
 
