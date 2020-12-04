@@ -9,6 +9,7 @@ void IOinit(void);
 //This function implements the IO checks and LED blinking functions
 void IOcheck(void);
 
-void delay_ms(uint16_t time_ms);
+void CNinit(void);
+
 #endif	/* XC_HEADER_TEMPLATE_H */
 
