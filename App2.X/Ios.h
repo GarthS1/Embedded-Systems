@@ -7,7 +7,7 @@
 //This function initializes IO ports.
 void IOinit(void);
 //This function implements the IO checks and LED blinking functions
-void IOcheck(value);
+void IOcheck(void);
 
 void CNinit(void);
 
