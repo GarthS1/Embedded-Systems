@@ -5,8 +5,15 @@
  * Created on December 2, 2020, 5:48 PM
  */
 
-
-#include "xc.h"
+#include <xc.h>
+#include <p24fxxxx.h>
+#include <p24F16KA101.h>
+#include <stdio.h>
+#include <math.h>
+#include <errno.h>
+#include "ADC.h"
+#include "UART2.h"
+#include "ChangeClk.h"
 
 #pragma config FCKSM = CSECMD // Clock switching is enabled, clock monitor disabled
 #pragma config OSCIOFNC = ON //CLKO output disabled on pin 8, use as IO.

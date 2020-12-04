@@ -207,9 +207,9 @@ __FDS
 .comment
  *(.comment)
 
-.debug_info       0x000000        0x126
+.debug_info       0x000000        0x144
  *(.debug_info)
- .debug_info      0x000000        0x126 build/default/production/newmainXC16.o
+ .debug_info      0x000000        0x144 build/default/production/newmainXC16.o
  *(.gnu.linkonce.wi.*)
 
 .debug_abbrev     0x000000         0x36
