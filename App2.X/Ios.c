@@ -9,6 +9,7 @@
 #include <xc.h>
 #include <stdio.h>
 #include "UART2.h"
+#include "ADC.h"
 
 int CN30Flag = 0;   //RA2 push button flag
 int CN0Flag = 0;    //RA4 push button flag
@@ -40,8 +41,12 @@ void CNinit() {
 //This function implements the IO checks and LED blinking functions
 void IOcheck() {
     if(PORTAbits.RA2 == 0 && PORTBbits.RB4 == 1 && PORTAbits.RA4 == 1) {  //If PB1 is pressed 
+        uint16_t value;
+        value=do_ADC();
         displayVoltage(value);
     }else if(PORTAbits.RA4 == 0 && PORTBbits.RB4 == 1 && PORTAbits.RA2 == 1) { //IF PB2 is pressed 
+        uint16_t value;
+        value=do_ADC();
         displayResistance(value);
     }else if(PORTBbits.RB4 == 0 && PORTAbits.RA4 == 1 && PORTAbits.RA2 == 1) {  //IF PB3 is pressed 
 
