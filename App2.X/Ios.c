@@ -40,9 +40,9 @@ void CNinit() {
 //This function implements the IO checks and LED blinking functions
 void IOcheck() {
     if(PORTAbits.RA2 == 0 && PORTBbits.RB4 == 1 && PORTAbits.RA4 == 1) {  //If PB1 is pressed 
-        displayVoltage();
+        displayVoltage(value);
     }else if(PORTAbits.RA4 == 0 && PORTBbits.RB4 == 1 && PORTAbits.RA2 == 1) { //IF PB2 is pressed 
-        displayResistance();
+        displayResistance(value);
     }else if(PORTBbits.RB4 == 0 && PORTAbits.RA4 == 1 && PORTAbits.RA2 == 1) {  //IF PB3 is pressed 
         Idle();
     }else if(PORTAbits.RA2 == 1 && PORTBbits.RB4 == 1 && PORTAbits.RA4 == 1) {  //If no button pressed 
@@ -53,11 +53,11 @@ void IOcheck() {
 
 }
 
-void displayVoltage() {
+void displayVoltage(value) {
     
 }
 
-void displayResistance() {}
+void displayResistance() {value}
 
 //Interrupt routine for _CNInterrupt
 void __attribute__((interrupt, no_auto_psv)) _CNInterrupt(void) {
