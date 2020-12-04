@@ -44,11 +44,11 @@ void IOcheck() {
     }else if(PORTAbits.RA4 == 0 && PORTBbits.RB4 == 1 && PORTAbits.RA2 == 1) { //IF PB2 is pressed 
         displayResistance();
     }else if(PORTBbits.RB4 == 0 && PORTAbits.RA4 == 1 && PORTAbits.RA2 == 1) {  //IF PB3 is pressed 
-
+        Idle();
     }else if(PORTAbits.RA2 == 1 && PORTBbits.RB4 == 1 && PORTAbits.RA4 == 1) {  //If no button pressed 
-
+        Idle();
     }else{ //If any combination of buttons pressed
-
+        Idle();
     }
 
 }
