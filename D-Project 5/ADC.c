@@ -33,6 +33,8 @@ uint16_t do_ADC(void) {
     AD1CHSbits.CH0SA = 0b0101;  //Enable AN5 or pin number 8 to ADC input/
     
     AD1PCFGbits.PCFG5 = 0;   //Disable digital IO on pin 8.
+    AD1PCFGbits.PCFG11 = 0;   //Disable digital IO on pin 16.
+    
     
     AD1CSSLbits.CSSL0 = 0;
     AD1CSSLbits.CSSL1 = 0;

@@ -56,7 +56,6 @@ void displayADC(uint16_t value) {
 int main(void) {
     NewClk(32);     //Use system clock 32kHz
     TRISAbits.TRISA3 = 1; //Enable RA3 as ADC input 
-
     InitUART2();   //Initialize UART2
          
     while(1) {
