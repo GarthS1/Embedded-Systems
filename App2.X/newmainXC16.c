@@ -14,7 +14,7 @@
 #include "ADC.h"
 #include "UART2.h"
 #include "ChangeClk.h"
-
+#include "Ios.h"
 #pragma config FCKSM = CSECMD // Clock switching is enabled, clock monitor disabled
 #pragma config OSCIOFNC = ON //CLKO output disabled on pin 8, use as IO.
 
