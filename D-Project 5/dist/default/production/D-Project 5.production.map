@@ -115,10 +115,10 @@ section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200               0x85a           0xc87  (3207)
 .const                       0xa5a                0x26            0x39  (57)
-.text                        0xa80               0x390           0x558  (1368)
-.dinit                       0xe10                 0xe            0x15  (21)
+.text                        0xa80               0x392           0x55b  (1371)
+.dinit                       0xe12                 0xe            0x15  (21)
 
-                 Total "program" memory used (bytes):         0x122d  (4653) 28%
+                 Total "program" memory used (bytes):         0x1230  (4656) 28%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x600]
@@ -434,12 +434,12 @@ __FDS
  .debug_abbrev    0x0001a3        0x123 build/default/production/ChangeClk.o
  .debug_abbrev    0x0002c6        0x114 build/default/production/UART2.o
 
-.debug_line       0x000000        0x434
+.debug_line       0x000000        0x435
  *(.debug_line)
  .debug_line      0x000000        0x102 build/default/production/newmainXC16.o
- .debug_line      0x000102         0xf6 build/default/production/ADC.o
- .debug_line      0x0001f8         0xea build/default/production/ChangeClk.o
- .debug_line      0x0002e2        0x152 build/default/production/UART2.o
+ .debug_line      0x000102         0xf7 build/default/production/ADC.o
+ .debug_line      0x0001f9         0xea build/default/production/ChangeClk.o
+ .debug_line      0x0002e3        0x152 build/default/production/UART2.o
 
 .debug_frame      0x000000        0x198
  *(.debug_frame)
@@ -991,7 +991,7 @@ __c30_signature
 .const              0x8a5a         0x26 load address 0x000a5a  
  .const             0x8a5a         0x26 build/default/production/newmainXC16.o
 
-.text             0x000a80        0x390
+.text             0x000a80        0x392
  .text            0x000a80        0x1ee build/default/production/UART2.o
                   0x000a80                  _InitUART2
                   0x000ae8                  _XmitUART2
@@ -1004,8 +1004,8 @@ __c30_signature
                   0x000d28                  _main
  .text            0x000d38         0x74 build/default/production/ChangeClk.o
                   0x000d38                  _NewClk
- .text            0x000dac         0x64 build/default/production/ADC.o
+ .text            0x000dac         0x66 build/default/production/ADC.o
                   0x000dac                  _do_ADC
 
-.dinit            0x000e10          0xe
- .dinit           0x000e10          0xe data_init
+.dinit            0x000e12          0xe
+ .dinit           0x000e12          0xe data_init

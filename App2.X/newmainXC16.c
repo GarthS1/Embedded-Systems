@@ -31,7 +31,7 @@ int main(void) {
     TRISAbits.TRISA3 = 1; //Enable RA3 as ADC input 
     TRISBbits.TRISB13 = 1; //Enable RB 13 as ADC input
     InitUART2();   //Initialize UART2
-    
+
     while(1) {}
     
     return 0;
