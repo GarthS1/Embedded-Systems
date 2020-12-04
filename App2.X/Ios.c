@@ -23,15 +23,9 @@ void IOinit() {
 //This function implements the IO checks and LED blinking functions
 void IOcheck() {
     if(PORTAbits.RA2 == 0 && PORTBbits.RB4 == 1 && PORTAbits.RA4 == 1) {  //If PB1 is pressed 
-        LATBbits.LATB8 = 1; //Led stays on without blinking
-        delay_ms(1000);    //Delay 1s PR2 = 4
-        LATBbits.LATB8 = 0; //Led turned off
-        delay_ms(1000); 
+        displayVoltage();
     }else if(PORTAbits.RA4 == 0 && PORTBbits.RB4 == 1 && PORTAbits.RA2 == 1) { //IF PB2 is pressed 
-        LATBbits.LATB8 = 1; //Led stays 
-        delay_ms(2000);   //Delay 2s PR2 = 8
-        LATBbits.LATB8 = 0; //Led turned off
-        delay_ms(2000);   
+        displayResistance();
     }else if(PORTBbits.RB4 == 0 && PORTAbits.RA4 == 1 && PORTAbits.RA2 == 1) {  //IF PB3 is pressed 
         LATBbits.LATB8 = 1; //Led stays 
         delay_ms(3000);   //Delay 3s PR2 = 12
