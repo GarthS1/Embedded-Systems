@@ -66,7 +66,10 @@ void displayVoltage(value) {
     XmitUART2('V',1);
 }
 
-void displayResistance() {value}
+void displayResistance(value) {
+    
+
+}
 
 //Interrupt routine for _CNInterrupt
 void __attribute__((interrupt, no_auto_psv)) _CNInterrupt(void) {
