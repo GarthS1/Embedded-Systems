@@ -50,9 +50,7 @@ void IOcheck() {
         displayResistance(value);
     }else if(PORTBbits.RB4 == 0 && PORTAbits.RA4 == 1 && PORTAbits.RA2 == 1) {  //IF PB3 is pressed 
 
-    }else if(PORTAbits.RA2 == 1 && PORTBbits.RB4 == 1 && PORTAbits.RA4 == 1) {  //If no button pressed 
-
-    }else{ //If any combination of buttons pressed
+    }else(PORTAbits.RA2 == 1 && PORTBbits.RB4 == 1 && PORTAbits.RA4 == 1) {  //If no button pressed 
 
     }
 
@@ -61,7 +59,11 @@ void IOcheck() {
 void displayVoltage(value) {
     float vol=0;
     vol=value*(3.2/(pow(2,10)-1));
-    Disp2String
+    char str[20];
+    sprintf(str,"%1.3f",vol);
+    Disp2String(" \r VOLTMETER Voltage=");
+    Disp2String(str);
+    XmitUART2('V',1);
 }
 
 void displayResistance() {value}
