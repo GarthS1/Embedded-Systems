@@ -58,17 +58,26 @@ void IOcheck() {
 
 void displayVoltage(value) {
     float vol=0;
-    vol=value*(3.2/(pow(2,10)-1));
+    vol=value*(3/(pow(2,10)-1));//Vin = Vref * ADCBUF/(2^10 - 1) 
     char str[20];
     sprintf(str,"%1.3f",vol);
+     //display voltage
     Disp2String(" \r VOLTMETER Voltage=");
     Disp2String(str);
     XmitUART2('V',1);
 }
 
 void displayResistance(value) {
-    
-
+    //Vin = Vref * (R-DUT/(1000 + R-DUT))
+    //Vin/Vref = ADCBUF/1023 
+    //R-DUT = 1000*(ADCBUF/1023)/(1-ADCBUF/1023)
+    float R= 1000*(value/1023)/(1-value/1023);
+    char str[20];
+    sprintf(str,"%1.3f",R);
+    //display resistance
+    Disp2String(" \r OHMMETER Resistance="); 
+    Disp2String(str);
+    XmitUART2('Ω',1);
 }
 
 //Interrupt routine for _CNInterrupt
