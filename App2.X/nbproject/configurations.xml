@@ -8,6 +8,7 @@
       <itemPath>UART2.h</itemPath>
       <itemPath>ChangeClk.h</itemPath>
       <itemPath>Ios.h</itemPath>
+      <itemPath>TimeDelay.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -21,6 +22,7 @@
       <itemPath>ChangeClk.c</itemPath>
       <itemPath>UART2.c</itemPath>
       <itemPath>Ios.c</itemPath>
+      <itemPath>TimeDelay.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

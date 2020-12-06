@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=newmainXC16.c ADC.c ChangeClk.c UART2.c Ios.c
+SOURCEFILES_QUOTED_IF_SPACED=newmainXC16.c ADC.c ChangeClk.c UART2.c Ios.c TimeDelay.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/newmainXC16.o ${OBJECTDIR}/ADC.o ${OBJECTDIR}/ChangeClk.o ${OBJECTDIR}/UART2.o ${OBJECTDIR}/Ios.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/newmainXC16.o.d ${OBJECTDIR}/ADC.o.d ${OBJECTDIR}/ChangeClk.o.d ${OBJECTDIR}/UART2.o.d ${OBJECTDIR}/Ios.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/newmainXC16.o ${OBJECTDIR}/ADC.o ${OBJECTDIR}/ChangeClk.o ${OBJECTDIR}/UART2.o ${OBJECTDIR}/Ios.o ${OBJECTDIR}/TimeDelay.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/newmainXC16.o.d ${OBJECTDIR}/ADC.o.d ${OBJECTDIR}/ChangeClk.o.d ${OBJECTDIR}/UART2.o.d ${OBJECTDIR}/Ios.o.d ${OBJECTDIR}/TimeDelay.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/newmainXC16.o ${OBJECTDIR}/ADC.o ${OBJECTDIR}/ChangeClk.o ${OBJECTDIR}/UART2.o ${OBJECTDIR}/Ios.o
+OBJECTFILES=${OBJECTDIR}/newmainXC16.o ${OBJECTDIR}/ADC.o ${OBJECTDIR}/ChangeClk.o ${OBJECTDIR}/UART2.o ${OBJECTDIR}/Ios.o ${OBJECTDIR}/TimeDelay.o
 
 # Source Files
-SOURCEFILES=newmainXC16.c ADC.c ChangeClk.c UART2.c Ios.c
+SOURCEFILES=newmainXC16.c ADC.c ChangeClk.c UART2.c Ios.c TimeDelay.c
 
 
 CFLAGS=
@@ -129,6 +129,13 @@ ${OBJECTDIR}/Ios.o: Ios.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE)  Ios.c  -o ${OBJECTDIR}/Ios.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/Ios.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1    -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
 	@${FIXDEPS} "${OBJECTDIR}/Ios.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
+${OBJECTDIR}/TimeDelay.o: TimeDelay.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/TimeDelay.o.d 
+	@${RM} ${OBJECTDIR}/TimeDelay.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  TimeDelay.c  -o ${OBJECTDIR}/TimeDelay.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/TimeDelay.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1    -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/TimeDelay.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
 else
 ${OBJECTDIR}/newmainXC16.o: newmainXC16.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
@@ -164,6 +171,13 @@ ${OBJECTDIR}/Ios.o: Ios.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/Ios.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  Ios.c  -o ${OBJECTDIR}/Ios.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/Ios.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
 	@${FIXDEPS} "${OBJECTDIR}/Ios.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/TimeDelay.o: TimeDelay.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/TimeDelay.o.d 
+	@${RM} ${OBJECTDIR}/TimeDelay.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  TimeDelay.c  -o ${OBJECTDIR}/TimeDelay.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/TimeDelay.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/TimeDelay.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 endif
 

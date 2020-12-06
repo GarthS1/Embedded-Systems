@@ -5,15 +5,14 @@
  * Created on October 13, 2020, 11:13 PM
  */
 
-#include "Ios.h"
 #include <xc.h>
-#include <stdio.h>
+#include "Ios.h"
 #include "UART2.h"
 #include "ADC.h"
+#include <math.h>
+#include "TimeDelay.h"
 
-int CN30Flag = 0;   //RA2 push button flag
-int CN0Flag = 0;    //RA4 push button flag
-int CN1Flag = 0;    //RB4 push button flag
+#define VREF 3.2
 
 //This function initializes IO ports.
 void IOinit() {
@@ -24,7 +23,6 @@ void IOinit() {
     TRISAbits.TRISA2 = 1; //RA2 is input, PB1 is connected to this port.
     TRISAbits.TRISA4 = 1; //RA4 is input, PB2 is connected to this port.
     TRISBbits.TRISB4 = 1; //RB4 is input, PB3 is connected to this port
-    CNinit();
 }
 
 
@@ -40,46 +38,51 @@ void CNinit() {
 
 //This function implements the IO checks and LED blinking functions
 void IOcheck() {
-    if(PORTAbits.RA2 == 0 && PORTBbits.RB4 == 1 && PORTAbits.RA4 == 1) {  //If PB1 is pressed 
-        uint16_t value;
-        value=do_ADC();
-        displayVoltage(value);
-    }else if(PORTAbits.RA4 == 0 && PORTBbits.RB4 == 1 && PORTAbits.RA2 == 1) { //IF PB2 is pressed 
-        uint16_t value;
-        value=do_ADC();
-        displayResistance(value);
-    }else if(PORTBbits.RB4 == 0 && PORTAbits.RA4 == 1 && PORTAbits.RA2 == 1) {  //IF PB3 is pressed 
+    IEC1bits.CNIE = 0; //disable CN interrupts to avoid debounces
+    delay_ms(400, 1);   // 400 msec delay to filter out debounces 
+    IEC1bits.CNIE = 1; //Enable CN interrupts to detect pb release
+    
+    while(PORTAbits.RA2 == 0 && PORTBbits.RB4 == 1 && PORTAbits.RA4 == 1) {  //If PB1 is pressed 
+        init_do_ADC();
+    }
+    
+    while(PORTAbits.RA4 == 0 && PORTBbits.RB4 == 1 && PORTAbits.RA2 == 1) { //IF PB2 is pressed 
+        init_do_ADC();
+    }
+    
+    while(PORTBbits.RB4 == 0 && PORTAbits.RA4 == 1 && PORTAbits.RA2 == 1) {  //IF PB3 is pressed 
         Idle();//set MCU to idle mode
     }
 }
 
-void displayVoltage(value) {
-    float vol=0;
-    vol=value*(3/(pow(2,10)-1));//Vin = Vref * ADCBUF/(2^10 - 1) 
-    char str[20];
-    sprintf(str,"%1.3f",vol);
+void displayVoltage(uint16_t adc_value) {
+    uint16_t vol = adc_value*(VREF/(pow(2,10)-1));  //Vin = Vref * ADCBUF/(2^10 - 1) 
      //display voltage
-    Disp2String(" \r VOLTMETER Voltage=");
-    Disp2String(str);
-    XmitUART2('V',1);
+    Disp2String("\rVOLTMETER Voltage = ");
+    Disp2Dec(vol);
+    Disp2String("V");
+    Disp2String("                                   ");
 }
 
-void displayResistance(value) {
+void displayResistance(uint16_t adc_value) {
     //Vin = Vref * (R-DUT/(1000 + R-DUT))
     //Vin/Vref = ADCBUF/1023 
     //R-DUT = 1000*(ADCBUF/1023)/(1-ADCBUF/1023)
-    float R= 1000*(value/1023)/(1-value/1023);
-    char str[20];
-    sprintf(str,"%1.3f",R);
+    uint16_t R = 1000*(adc_value/1023)/(1 - adc_value/1023);
     //display resistance
     Disp2String(" \r OHMMETER Resistance="); 
-    Disp2String(str);
-    XmitUART2('Ω',1);
+    Disp2Dec(R);
+    Disp2String("?");
+    Disp2String("                                   ");
 }
 
 //Interrupt routine for _CNInterrupt
 void __attribute__((interrupt, no_auto_psv)) _CNInterrupt(void) {
-    Nop();
+    IFS1bits.CNIF = 0;		// clear IF flag
+    T2CONbits.TON = 0;    // Disable timer
+    IEC0bits.T2IE = 0;    //Disable timer interrupt
+    IOcheck();
+    Nop();	 
 }
 
 

@@ -28,9 +28,12 @@
 
 int main(void) {
     NewClk(32);     //Use system clock 32kHz
+    IOinit();   //Initialize IO ports
+    CNinit();   //Initialize change notification
+    InitUART2();   //Initialize UART2
+    
     TRISAbits.TRISA3 = 1; //Enable RA3 as ADC input 
     TRISBbits.TRISB13 = 1; //Enable RB 13 as ADC input
-    InitUART2();   //Initialize UART2
 
     while(1) {}
     

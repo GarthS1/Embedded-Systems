@@ -11,5 +11,8 @@ void IOcheck(void);
 
 void CNinit(void);
 
+void displayVoltage(uint16_t value);
+
+void displayResistance(uint16_t value);
 #endif	/* XC_HEADER_TEMPLATE_H */
 

@@ -8,8 +8,25 @@
 
 #include "xc.h"
 #include "ADC.h"
+#include "UART2.h"
+#include "ChangeClk.h"
+#include "Ios.h"
 
-uint16_t do_ADC(void) {
+int RA2PB_FLAG = 0;
+int RA4PB_FLAG = 0;
+
+void buttonPushed() {
+    if(PORTAbits.RA2 == 0)
+        RA2PB_FLAG = 1;
+    else if(PORTAbits.RA4 == 0)
+        RA4PB_FLAG = 1;
+}
+/*
+ * START SAMPLING FOR ONE TIME
+ */
+void init_do_ADC(void) {
+    buttonPushed(); //Determine if RA2 or RA4 was pushed
+    
     AD1CON1bits.ADON = 1; //Enable ADC module
     
     AD1CON1bits.FORM0 = 0;
@@ -22,7 +39,11 @@ uint16_t do_ADC(void) {
     AD1CON2bits.VCFG = 0b000;   //Voltage reference configuration bits VR+ = AVDD, VR- = AVSS
     AD1CON2bits.CSCNA = 0;      //Do not scan input
     
-//    AD1CON2bits.SMPI = 0b0000; //Only if you want to use interrupt
+    AD1CON2bits.SMPI = 0b0000; //Only if you want to use interrupt
+    IPC3bits.AD1IP = 5;         //Priority level for interrupt
+    IEC0bits.AD1IE = 1;         //Enable adc interrupt
+    
+    
     AD1CON2bits.BUFM = 0;   //Enable 16-word buffer
     AD1CON2bits.ALTS = 0;   //Always uses MUX A input multiplexer settings
     
@@ -45,15 +66,24 @@ uint16_t do_ADC(void) {
     AD1CSSLbits.CSSL11 = 0;
     AD1CSSLbits.CSSL12 = 0; //Analog channel omitted from input scan
     
-    
     AD1CON1bits.SAMP = 1;
-    while(!AD1CON1bits.DONE) {}
-    
-    uint16_t value = ADC1BUF0;  //SAVE ADC1BUF0 output to value
-    AD1CON1bits.SAMP = 0;       //Stop sampling
-    AD1CON1bits.ADON = 0;       //Turn off ADC
-    
-    return value;
 }
+
+void __attribute__((interrupt, no_auto_psv)) _ADC1Interrupt(void) {
+//    displayADC(ADC1BUF0);   //Display ADC1BUF0 value
+    IFS0bits.AD1IF = 0; //Clear interrupt flag
+    
+    if(RA2PB_FLAG) {
+        displayVoltage(ADC1BUF0);
+        RA2PB_FLAG = 0; //Reset the flag
+    }else if(RA4PB_FLAG) {
+        displayResistance(ADC1BUF0);
+        RA4PB_FLAG = 0; //Reset the flag
+    }
+}   
+
+
+
+
 
 
