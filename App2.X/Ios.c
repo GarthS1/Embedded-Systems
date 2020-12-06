@@ -49,11 +49,8 @@ void IOcheck() {
         value=do_ADC();
         displayResistance(value);
     }else if(PORTBbits.RB4 == 0 && PORTAbits.RA4 == 1 && PORTAbits.RA2 == 1) {  //IF PB3 is pressed 
-
-    }else(PORTAbits.RA2 == 1 && PORTBbits.RB4 == 1 && PORTAbits.RA4 == 1) {  //If no button pressed 
-
+        Idle();//set MCU to idle mode
     }
-
 }
 
 void displayVoltage(value) {
