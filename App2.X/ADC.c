@@ -37,7 +37,7 @@ void init_do_ADC(void) {
     AD1CON1bits.SSRC2 = 1; //Internal counter ends sampling and starts conversion
    
     AD1CON2bits.VCFG = 0b000;   //Voltage reference configuration bits VR+ = AVDD, VR- = AVSS
-    AD1CON2bits.CSCNA = 0;      //Do not scan input
+    AD1CON2bits.CSCNA = 1;      //Enable scan input
     
     AD1CON2bits.SMPI = 0b0000; //Only if you want to use interrupt
     IPC3bits.AD1IP = 7;         //Priority level for interrupt
@@ -65,9 +65,9 @@ void init_do_ADC(void) {
     AD1CSSLbits.CSSL2 = 0;
     AD1CSSLbits.CSSL3 = 0;
     AD1CSSLbits.CSSL4 = 0;
-    AD1CSSLbits.CSSL5 = 0;
+    AD1CSSLbits.CSSL5 = 1;
     AD1CSSLbits.CSSL10 = 0;
-    AD1CSSLbits.CSSL11 = 0;
+    AD1CSSLbits.CSSL11 = 1;
     AD1CSSLbits.CSSL12 = 0; //Analog channel omitted from input scan
     
     AD1CON1bits.SAMP = 1;
@@ -85,6 +85,10 @@ void __attribute__((interrupt, no_auto_psv)) _ADC1Interrupt(void) {
         RA4PB_FLAG = 0; //Reset the flag
     }
 }   
+
+void __attribute__((interrupt, no_auto_psv)) _ADC2Interrupt(void) {
+    
+}
 
 
 
