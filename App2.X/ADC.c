@@ -40,7 +40,7 @@ void init_do_ADC(void) {
     AD1CON2bits.CSCNA = 0;      //Do not scan input
     
     AD1CON2bits.SMPI = 0b0000; //Only if you want to use interrupt
-    IPC3bits.AD1IP = 5;         //Priority level for interrupt
+    IPC3bits.AD1IP = 7;         //Priority level for interrupt
     IEC0bits.AD1IE = 1;         //Enable adc interrupt
     
     
