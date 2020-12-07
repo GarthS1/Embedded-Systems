@@ -55,7 +55,7 @@ void init_do_ADC(void) {
     if(RA2PB_FLAG)
         AD1CHSbits.CH0SA = 0b0101;  //Enable AN5 or pin number 8 to ADC input/
     else if(RA4PB_FLAG)
-        AD1CHSbits.CH0SA = 0b0111;  //Enable AN11 or pin number 16 to ADC input
+        AD1CHSbits.CH0SA = 0b1011;  //Enable AN11 or pin number 16 to ADC input
     
     AD1PCFGbits.PCFG5 = 0;   //Disable digital IO on pin 8.
     AD1PCFGbits.PCFG11 = 0;   //Disable digital IO on pin 16.
