@@ -117,11 +117,11 @@ section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200               0x8bc           0xd1a  (3354)
 .const                       0xabc                0x56            0x81  (129)
-.text                        0xb12               0x426           0x639  (1593)
-.dinit                       0xf38                0x14            0x1e  (30)
-.text                        0xf4c                0x12            0x1b  (27)
+.text                        0xb12               0x43e           0x65d  (1629)
+.dinit                       0xf50                0x14            0x1e  (30)
+.text                        0xf64                0x12            0x1b  (27)
 
-                 Total "program" memory used (bytes):         0x140d  (5133) 31%
+                 Total "program" memory used (bytes):         0x1431  (5169) 32%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x600]
@@ -211,9 +211,9 @@ External Symbols in Program Memory (by address):
                   0x000dc6                  _displayResistance
                   0x000e08                  _buttonPushed
                   0x000e28                  _init_do_ADC
-                  0x000e92                  _NewClk
-                  0x000f06                  _delay_ms
-                  0x000f4c                  _main
+                  0x000eaa                  _NewClk
+                  0x000f1e                  _delay_ms
+                  0x000f64                  _main
 
 External Symbols in Program Memory (by name):
 
@@ -225,7 +225,7 @@ External Symbols in Program Memory (by name):
                   0x000d2a                  _IOcheck
                   0x000d00                  _IOinit
                   0x000b12                  _InitUART2
-                  0x000e92                  _NewClk
+                  0x000eaa                  _NewClk
                   0x000b7a                  _XmitUART2
                   0x0002c8                  __ADC1Interrupt
                   0x00030e                  __CNInterrupt
@@ -262,14 +262,14 @@ External Symbols in Program Memory (by name):
                   0x00023c                  __psv_init
                   0x000200                  __resetPRI
                   0x000e08                  _buttonPushed
-                  0x000f06                  _delay_ms
+                  0x000f1e                  _delay_ms
                   0x000dc6                  _displayResistance
                   0x000d9e                  _displayVoltage
                   0x0007ae                  _expf
                   0x000e28                  _init_do_ADC
                   0x000988                  _ldexpf
                   0x0009cc                  _logf
-                  0x000f4c                  _main
+                  0x000f64                  _main
                   0x000512                  _powf
                   0x000ab0                  _strlen
 
@@ -471,14 +471,14 @@ __FDS
  .debug_abbrev    0x0003ac        0x12f build/default/production/Ios.o
  .debug_abbrev    0x0004db         0xeb build/default/production/TimeDelay.o
 
-.debug_line       0x000000        0x650
+.debug_line       0x000000        0x653
  *(.debug_line)
  .debug_line      0x000000         0xe6 build/default/production/newmainXC16.o
- .debug_line      0x0000e6        0x114 build/default/production/ADC.o
- .debug_line      0x0001fa         0xea build/default/production/ChangeClk.o
- .debug_line      0x0002e4        0x152 build/default/production/UART2.o
- .debug_line      0x000436        0x11f build/default/production/Ios.o
- .debug_line      0x000555         0xfb build/default/production/TimeDelay.o
+ .debug_line      0x0000e6        0x117 build/default/production/ADC.o
+ .debug_line      0x0001fd         0xea build/default/production/ChangeClk.o
+ .debug_line      0x0002e7        0x152 build/default/production/UART2.o
+ .debug_line      0x000439        0x11f build/default/production/Ios.o
+ .debug_line      0x000558         0xfb build/default/production/TimeDelay.o
 
 .debug_frame      0x000000        0x2ea
  *(.debug_frame)
@@ -1068,7 +1068,7 @@ __c30_signature
 .const              0x8abc         0x56 load address 0x000abc  
  .const             0x8abc         0x56 build/default/production/Ios.o
 
-.text             0x000b12        0x426
+.text             0x000b12        0x43e
  .text            0x000b12        0x1ee build/default/production/UART2.o
                   0x000b12                  _InitUART2
                   0x000b7a                  _XmitUART2
@@ -1082,17 +1082,17 @@ __c30_signature
                   0x000d2a                  _IOcheck
                   0x000d9e                  _displayVoltage
                   0x000dc6                  _displayResistance
- .text            0x000e08         0x8a build/default/production/ADC.o
+ .text            0x000e08         0xa2 build/default/production/ADC.o
                   0x000e08                  _buttonPushed
                   0x000e28                  _init_do_ADC
- .text            0x000e92         0x74 build/default/production/ChangeClk.o
-                  0x000e92                  _NewClk
- .text            0x000f06         0x32 build/default/production/TimeDelay.o
-                  0x000f06                  _delay_ms
+ .text            0x000eaa         0x74 build/default/production/ChangeClk.o
+                  0x000eaa                  _NewClk
+ .text            0x000f1e         0x32 build/default/production/TimeDelay.o
+                  0x000f1e                  _delay_ms
 
-.dinit            0x000f38         0x14
- .dinit           0x000f38         0x14 data_init
+.dinit            0x000f50         0x14
+ .dinit           0x000f50         0x14 data_init
 
-.text             0x000f4c         0x12
- .text            0x000f4c         0x12 build/default/production/newmainXC16.o
-                  0x000f4c                  _main
+.text             0x000f64         0x12
+ .text            0x000f64         0x12 build/default/production/newmainXC16.o
+                  0x000f64                  _main
