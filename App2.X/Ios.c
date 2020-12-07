@@ -14,6 +14,7 @@
 
 #define VREF 3.2
 
+int PUSH_FLAG = 0;
 //This function initializes IO ports.
 void IOinit() {
     AD1PCFG = 0xFFFF; // Turn all analog pins as digital
@@ -38,10 +39,6 @@ void CNinit() {
 
 //This function implements the IO checks and LED blinking functions
 void IOcheck() {
-    IEC1bits.CNIE = 0; //disable CN interrupts to avoid debounces
-    delay_ms(400, 1);   // 400 msec delay to filter out debounces 
-    IEC1bits.CNIE = 1; //Enable CN interrupts to detect pb release
-    
     while(PORTAbits.RA2 == 0 && PORTBbits.RB4 == 1 && PORTAbits.RA4 == 1) {  //If PB1 is pressed 
         init_do_ADC();
     }
@@ -78,10 +75,12 @@ void displayResistance(uint16_t adc_value) {
 
 //Interrupt routine for _CNInterrupt
 void __attribute__((interrupt, no_auto_psv)) _CNInterrupt(void) {
+    PUSH_FLAG = 1 - PUSH_FLAG;  //To filter action when you release the button
     IFS1bits.CNIF = 0;		// clear IF flag
     T2CONbits.TON = 0;    // Disable timer
     IEC0bits.T2IE = 0;    //Disable timer interrupt
-    IOcheck();
+    if(PUSH_FLAG)
+        IOcheck();
     Nop();	 
 }
 
