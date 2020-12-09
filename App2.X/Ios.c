@@ -48,6 +48,7 @@ void IOcheck() {
     }
     
     while(PORTBbits.RB4 == 0 && PORTAbits.RA4 == 1 && PORTAbits.RA2 == 1) {  //IF PB3 is pressed 
+        Disp2String("                                    ");
         Idle();//set MCU to idle mode
     }
 }
@@ -65,7 +66,9 @@ void displayResistance(uint16_t adc_value) {
     //Vin = Vref * (R-DUT/(1000 + R-DUT))
     //Vin/Vref = ADCBUF/1023 
     //R-DUT = 1000*(ADCBUF/1023)/(1-ADCBUF/1023)
-    uint16_t R = 1000*(adc_value/1023)/(1 - adc_value/1023);
+    //1000*(adc_value/1023)/(1 - adc_value/1023)
+    float vol = adc_value*(VREF/(pow(2,10)-1));
+    uint16_t R = 1000*vol/(VREF - vol); 
     //display resistance
     Disp2String(" \r OHMMETER Resistance="); 
     Disp2Dec(R);
@@ -83,6 +86,5 @@ void __attribute__((interrupt, no_auto_psv)) _CNInterrupt(void) {
         IOcheck();
     Nop();	 
 }
-
 
 

@@ -50,12 +50,12 @@ void doADC(int ANNUMBER) {
     }
     
     AD1CON1bits.ADON = 1; //Enable ADC module
-    AD1CON1bits.SAMP = 1;
+    AD1CON1bits.SAMP = 1;   //Start sampling
 }
 
 void __attribute__((interrupt, no_auto_psv)) _ADC1Interrupt(void) {
     IFS0bits.AD1IF = 0;     //Clear interrupt flag
-    AD1CON1bits.ADON = 0;   //Turn off ADC, turn on before sampling in do_ADC()
+    AD1CON1bits.ADON = 0;   //Turn off ADC
     if(PORTAbits.RA2 == 0 && PORTBbits.RB4 == 1 && PORTAbits.RA4 == 1) {
         displayVoltage(ADC1BUF0);
     }else if(PORTAbits.RA4 == 0 && PORTBbits.RB4 == 1 && PORTAbits.RA2 == 1) {

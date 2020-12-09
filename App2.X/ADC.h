@@ -35,7 +35,7 @@
 
 void doADC(int);
 void __attribute__((interrupt, no_auto_psv)) _ADC1Interrupt(void);
-
+void initADC(void);
 #ifdef	__cplusplus
 extern "C" {
 #endif /* __cplusplus */
