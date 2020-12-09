@@ -40,11 +40,11 @@ void CNinit() {
 //This function implements the IO checks and LED blinking functions
 void IOcheck() {
     while(PORTAbits.RA2 == 0 && PORTBbits.RB4 == 1 && PORTAbits.RA4 == 1) {  //If PB1 is pressed 
-        init_do_ADC();
+        doADC(5);
     }
     
     while(PORTAbits.RA4 == 0 && PORTBbits.RB4 == 1 && PORTAbits.RA2 == 1) { //IF PB2 is pressed 
-        init_do_ADC();
+        doADC(11);
     }
     
     while(PORTBbits.RB4 == 0 && PORTAbits.RA4 == 1 && PORTAbits.RA2 == 1) {  //IF PB3 is pressed 

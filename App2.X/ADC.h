@@ -33,7 +33,7 @@
 
 #include <xc.h> // include processor files - each processor file is guarded.  
 
-void init_do_ADC(void);
+void doADC(int);
 void __attribute__((interrupt, no_auto_psv)) _ADC1Interrupt(void);
 
 #ifdef	__cplusplus

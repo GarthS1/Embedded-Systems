@@ -5,6 +5,9 @@
         <group>
             <file>file:/C:/Users/blaob/git/ENCM-511/App2.X/Ios.c</file>
             <file>file:/C:/Users/blaob/git/ENCM-511/App2.X/TimeDelay.c</file>
+            <file>file:/C:/Users/blaob/git/ENCM-511/App2.X/ChangeClk.c</file>
+            <file>file:/C:/Users/blaob/git/ENCM-511/App2.X/UART2.c</file>
+            <file>file:/C:/Users/blaob/git/ENCM-511/App2.X/ADC.h</file>
             <file>file:/C:/Users/blaob/git/ENCM-511/App2.X/ADC.c</file>
             <file>file:/C:/Users/blaob/git/ENCM-511/App2.X/newmainXC16.c</file>
         </group>

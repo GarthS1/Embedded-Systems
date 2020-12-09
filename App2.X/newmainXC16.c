@@ -32,8 +32,7 @@ int main(void) {
     CNinit();   //Initialize change notification
     InitUART2();   //Initialize UART2
     
-    TRISAbits.TRISA3 = 1; //Enable RA3 as ADC input 
-    TRISBbits.TRISB13 = 1; //Enable RB13 as ADC input
+
 
     while(1) {}
     
