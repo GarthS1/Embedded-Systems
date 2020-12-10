@@ -47,6 +47,10 @@ void doADC(int ANNUMBER) {
         AD1PCFGbits.PCFG11 = 0; //Disable digital IO on pin 16.
         TRISBbits.TRISB13 = 1;  //Enable RB13 as ADC input
         AD1CHSbits.CH0SA = 0b1011;  //Enable AN11 or pin number 16 to ADC input
+    } else if(ANNUMBER == 12) {
+        AD1PCFGbits.PCFG12 = 0; //Disable digital IO on pin 16.
+        TRISBbits.TRISB12 = 1;  //Enable RB13 as ADC input
+        AD1CHSbits.CH0SA = 0b1100;  //Enable AN11 or pin number 16 to ADC input
     }
     
     AD1CON1bits.ADON = 1; //Enable ADC module
@@ -60,7 +64,9 @@ void __attribute__((interrupt, no_auto_psv)) _ADC1Interrupt(void) {
         displayVoltage(ADC1BUF0);
     }else if(PORTAbits.RA4 == 0 && PORTBbits.RB4 == 1 && PORTAbits.RA2 == 1) {
         displayResistance(ADC1BUF0);
+    }else if(PORTBbits.RB4 == 0 && PORTAbits.RA4 == 1 && PORTAbits.RA2 == 1) {
     }
+ 
 }   
 
 

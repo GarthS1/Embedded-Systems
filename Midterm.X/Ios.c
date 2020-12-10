@@ -47,7 +47,7 @@ void IOcheck() {
     }
     
     while(PORTBbits.RB4 == 0 && PORTAbits.RA4 == 1 && PORTAbits.RA2 == 1) {  //IF PB3 is pressed 
-        Disp2String("                                    ");
+        doADC(12);
         Idle();//set MCU to idle mode
     }
 }
