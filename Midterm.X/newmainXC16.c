@@ -31,13 +31,16 @@
 #define dsen() {__asm__ volatile ("BSET DSCON, #15");} //
 
 
-
+unsigned int clock_val;
 int main(void) {
     NewClk(32);     //Use system clock 32kHz
     IOinit();   //Initialize IO ports
     CNinit();   //Initialize change notification
     InitUART2();   //Initialize UART2
     
+    // Change Clock
+    clock_val = 32;
+    NewClk(clock_val); // 8 for 8 MHz; 500 for 500 kHz; 32 for 32 kHz
      ///////////////PULSE TEST SETTING 1 
 //    Change Clock
     NewClk(8); // 8 for 8 MHz; 500 for 500 kHz; 32 for 32 kHz
