@@ -14,5 +14,6 @@ void CNinit(void);
 void displayVoltage(uint16_t value);
 
 void displayResistance(uint16_t value);
+extern unsigned int clock_val;
 #endif	/* XC_HEADER_TEMPLATE_H */
 
