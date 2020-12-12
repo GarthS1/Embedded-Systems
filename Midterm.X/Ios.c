@@ -57,10 +57,12 @@ void IOcheck() {
 void displayVoltage(uint16_t adc_value) {
     uint16_t vol = adc_value*(VREF/(pow(2,10)-1));  //Vin = Vref * ADCBUF/(2^10 - 1) 
      //display voltage
+    NewClk(32);
     Disp2String("\rVOLTMETER Voltage = ");
     Disp2Dec(vol);
     Disp2String("V");
     Disp2String("                                   ");
+    NewClk(clock_val);
 }
 
 //Display the resistance
@@ -68,6 +70,7 @@ void displayResistance(uint16_t adc_value) {
     //Vin = Vref * (R-DUT/(1000 + R-DUT))
     //Vin/Vref = ADCBUF/1023 
     //R-DUT = 1000*(ADCBUF/1023)/(1-ADCBUF/1023)
+    NewClk(32);
     float vol = adc_value*(VREF/(pow(2,10)-1));
     uint16_t R = 1000*vol/(VREF - vol); 
     //display resistance
@@ -75,16 +78,19 @@ void displayResistance(uint16_t adc_value) {
     Disp2Dec(R);
     Disp2String("OHM");
     Disp2String("                                   ");
+    NewClk(clock_val);
 }
 
 void displayPulse(uint16_t value) {
+    NewClk(32);
     uint16_t freq = 0;
-    uint16_t amplitude;
+    uint16_t amplitude = value*(VREF/(pow(2,10)-1));  //Vin = Vref * ADCBUF/(2^10 - 1);
     Disp2String(" \r PULSEMETER Freq="); 
     Disp2Dec(freq);
     Disp2String("kHz, Amplitude="); 
-    Disp2Dec(amplitude);
+    Disp2Dec(value);
     Disp2String("V");
+    NewClk(clock_val);
 }
 
 //Interrupt routine for _CNInterrupt
