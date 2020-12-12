@@ -11,8 +11,8 @@
 #include "ADC.h"
 #include <math.h>
 #include "TimeDelay.h"
-#define VREF 3.2
 
+#define VREF 3.2
 
 //This function initializes IO ports.
 void IOinit() {
@@ -36,12 +36,11 @@ void CNinit() {
     IPC4bits.CNIP2 = 1;     //Change in IO Notifcation priority 6.
 }
 
-//This function implements the IO checks and LED blinking functions
+//This function implements the IO checks and changing the modes
 void IOcheck() {
     IEC1bits.CNIE = 0; //disable CN interrupts to avoid debounces
     delay_ms(400,1);   // 400 msec delay to filter out debounces 
     IEC1bits.CNIE = 1; //Enable CN interrupts to detect pb release
-    
     while(PORTAbits.RA2 == 0 && PORTBbits.RB4 == 1 && PORTAbits.RA4 == 1) {  //If PB1 is pressed 
         doADC(5);
     }
@@ -64,18 +63,28 @@ void displayVoltage(uint16_t adc_value) {
     Disp2String("                                   ");
 }
 
+//Display the resistance
 void displayResistance(uint16_t adc_value) {
     //Vin = Vref * (R-DUT/(1000 + R-DUT))
     //Vin/Vref = ADCBUF/1023 
     //R-DUT = 1000*(ADCBUF/1023)/(1-ADCBUF/1023)
-    //1000*(adc_value/1023)/(1 - adc_value/1023)
     float vol = adc_value*(VREF/(pow(2,10)-1));
     uint16_t R = 1000*vol/(VREF - vol); 
     //display resistance
     Disp2String(" \r OHMMETER Resistance="); 
     Disp2Dec(R);
-    Disp2String("?");
+    Disp2String("OHM");
     Disp2String("                                   ");
+}
+
+void displayPulse(uint16_t value) {
+    uint16_t freq = 0;
+    uint16_t amplitude;
+    Disp2String(" \r PULSEMETER Freq="); 
+    Disp2Dec(freq);
+    Disp2String("kHz, Amplitude="); 
+    Disp2Dec(amplitude);
+    Disp2String("V");
 }
 
 //Interrupt routine for _CNInterrupt
@@ -86,5 +95,3 @@ void __attribute__((interrupt, no_auto_psv)) _CNInterrupt(void) {
     IOcheck();
     Nop();	 
 }
-
-
