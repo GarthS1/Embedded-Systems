@@ -21,5 +21,6 @@ extern "C" {
 
 
 void NewClk(unsigned int);
-
+extern unsigned int clock_val;
 #endif	/* CHANGECLK_H */
+

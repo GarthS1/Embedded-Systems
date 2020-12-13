@@ -31,3 +31,4 @@ void Disp2String(char*);
 void Disp2Dec(unsigned int);
 
 #endif	/* UART2_H */
+

@@ -1,14 +1,15 @@
 /*
  * File:   TimeDelay.c
- * Author: blaob
+ * Author: Rushi V
  *
- * Created on December 6, 2020, 4:08 PM
+ * Created on October 5, 2020, 4:05 PM
  */
 
 
 #include "xc.h"
 #include "TimeDelay.h"
-
+#include "Ios.h"
+#include <stdio.h>
 
 void delay_ms(uint16_t time_ms, uint8_t idle_on)
 {
@@ -35,9 +36,11 @@ void delay_ms(uint16_t time_ms, uint8_t idle_on)
     return;
 }
 
+// Used in HW IO control Driver project 3
 void __attribute__((interrupt, no_auto_psv)) _T2Interrupt(void)
 {
      IFS0bits.T2IF=0; //Clear timer 2 interrupt flag
+    
+    // TMR2flag = 1; // optional global variable created by user
     return;
 }
-

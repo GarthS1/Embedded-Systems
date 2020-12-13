@@ -8,8 +8,6 @@
 
 #include "xc.h"
 #include "ADC.h"
-#include "UART2.h"
-#include "ChangeClk.h"
 #include "Ios.h"
 
 //Initialize the ADC 
@@ -29,10 +27,10 @@ void initADC() {
     AD1CON2bits.ALTS = 0;       //Always uses MUX A input multiplexer settings
     AD1CON3bits.ADRC = 0;       //Use system clock
     AD1CON3bits.SAMC = 0b11111; //Sampling time 10 * 2 /fclk
-    AD1CON3bits.ADCS=0b111111; //ADCS conversion clock selet bits. Ignored if using internal AD RC clock.
+    AD1CON3bits.ADCS=0b00001; //ADCS conversion clock selet bits. Ignored if using internal AD RC clock.
     
     //Interrupts 
-    IPC3bits.AD1IP = 7;         //Priority level for interrupt
+    IPC3bits.AD1IP = 6;         //Priority level for interrupt
     IEC0bits.AD1IE = 1;         //Enable adc interrupt request
     
     AD1CHSbits.CH0NA = 0;       //Set negative input to VR-
@@ -69,7 +67,7 @@ void doADC(int ANNUMBER) {
     AD1CON1bits.SAMP = 1; //Start Sampling
 }
 
-void __attribute__((interrupt, no_auto_psv)) _ADC1Interrupt(void) {
+void __attribute__((interrupt, no_auto_psv)) _ADC1Interrupt(void) { 
     if(PORTAbits.RA2 == 0 && PORTBbits.RB4 == 1 && PORTAbits.RA4 == 1) {
         displayVoltage(ADC1BUF0);
     }else if(PORTAbits.RA4 == 0 && PORTBbits.RB4 == 1 && PORTAbits.RA2 == 1) {
@@ -79,11 +77,4 @@ void __attribute__((interrupt, no_auto_psv)) _ADC1Interrupt(void) {
     }
     AD1CON1bits.ADON = 0;   //Turn off ADC, turn on before sampling in do_ADC()
     IFS0bits.AD1IF = 0;     //Clear interrupt flag
-} 
-
-
-
-
-
-
-
+}   
