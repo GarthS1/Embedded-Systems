@@ -30,7 +30,7 @@ void initADC() {
     AD1CON3bits.ADCS=0b00001; //ADCS conversion clock selet bits. Ignored if using internal AD RC clock.
     
     //Interrupts 
-    IPC3bits.AD1IP = 6;         //Priority level for interrupt
+    IPC3bits.AD1IP = 8;         //Priority level for interrupt
     IEC0bits.AD1IE = 1;         //Enable adc interrupt request
     
     AD1CHSbits.CH0NA = 0;       //Set negative input to VR-

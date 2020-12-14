@@ -115,22 +115,21 @@ Default Scalar Model: Small
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
-.text                        0x200               0x8ea           0xd5f  (3423)
-.const                       0xaea                0x7c            0xba  (186)
-.text                        0xb66               0x424           0x636  (1590)
-.dinit                       0xf8a                0x14            0x1e  (30)
-.text                        0xf9e                 0xe            0x15  (21)
+.text                        0x200               0x8de           0xd4d  (3405)
+.const                       0xade                0x86            0xc9  (201)
+.text                        0xb64               0x43c           0x65a  (1626)
+.dinit                       0xfa0                 0xe            0x15  (21)
 
-                 Total "program" memory used (bytes):         0x1482  (5250) 32%
+                 Total "program" memory used (bytes):         0x1485  (5253) 32%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x600]
 
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
-.nbss                        0x800                   0             0x6  (6)
+.nbss                        0x800                   0             0x4  (4)
 
-                 Total "data" memory used (bytes):            0x6  (6) <1%
+                 Total "data" memory used (bytes):            0x4  (4) <1%
 
 
 Dynamic Memory Usage
@@ -138,9 +137,9 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                        0x806                               0x5fa  (1530)
+stack                        0x804                               0x5fc  (1532)
 
-                 Maximum dynamic memory (bytes):          0x5fa  (1530)
+                 Maximum dynamic memory (bytes):          0x5fc  (1532)
 
 Info: Project is using a large data memory model when small data memory model is sufficient.
 
@@ -148,11 +147,9 @@ Info: Project is using a large data memory model when small data memory model is
 External Symbols in Data Memory (by address):
 
                     0x0800                  _clkval
-                    0x0802                  _PUSH_FLAG
 
 External Symbols in Data Memory (by name):
 
-                    0x0802                  _PUSH_FLAG
                     0x0800                  _clkval
 
 External Symbols in Program Memory (by address):
@@ -165,111 +162,111 @@ External Symbols in Program Memory (by address):
                   0x000320                  __U2RXInterrupt
                   0x000328                  __U2TXInterrupt
                   0x000330                  __CNInterrupt
-                  0x000360                  __T2Interrupt
-                  0x000368                  __DefaultInterrupt
-                  0x00036e                  ___subsf3
-                  0x000370                  ___addsf3
-                  0x00042a                  ___divsf3
-                  0x0004ae                  ___fixunssfsi
-                  0x0004e4                  ___floatsisf
-                  0x0004ea                  ___floatunsisf
-                  0x0004ee                  __fpack
-                  0x00053a                  __funpack
-                  0x000564                  __funpack2
-                  0x000574                  __fPropagateNaN
-                  0x000586                  __fbopExit
-                  0x00058e                  __fbopReturnNaN
-                  0x000594                  ___mulsf3
-                  0x0005fc                  _powf
-                  0x0007c2                  __frexpf
-                  0x0007dc                  _expf
-                  0x0008a0                  __fchop
-                  0x0008ee                  ___lesf2
-                  0x0008ee                  ___ltsf2
-                  0x0008ee                  ___eqsf2
-                  0x0008f2                  ___gtsf2
-                  0x0008f2                  ___gesf2
-                  0x0008f6                  ___fixsfsi
-                  0x000938                  ___floatdisf
-                  0x000958                  ___floatundisf
-                  0x0009b6                  _ldexpf
-                  0x0009fa                  _logf
-                  0x000aa8                  __fcompare
-                  0x000ade                  _strlen
-                  0x000b66                  _InitUART2
-                  0x000bce                  _XmitUART2
-                  0x000c06                  _Disp2Hex
-                  0x000c64                  _Disp2Hex32
-                  0x000cd2                  _Disp2Dec
-                  0x000d32                  _Disp2String
-                  0x000d54                  _IOinit
-                  0x000d6a                  _CNinit
-                  0x000d7e                  _IOcheck
-                  0x000df0                  _displayVoltage
-                  0x000e18                  _displayResistance
-                  0x000e5e                  _initADC
-                  0x000eac                  _doADC
-                  0x000ee4                  _NewClk
-                  0x000f58                  _delay_ms
-                  0x000f9e                  _main
+                  0x000354                  __T2Interrupt
+                  0x00035c                  __DefaultInterrupt
+                  0x000362                  ___subsf3
+                  0x000364                  ___addsf3
+                  0x00041e                  ___divsf3
+                  0x0004a2                  ___fixunssfsi
+                  0x0004d8                  ___floatsisf
+                  0x0004de                  ___floatunsisf
+                  0x0004e2                  __fpack
+                  0x00052e                  __funpack
+                  0x000558                  __funpack2
+                  0x000568                  __fPropagateNaN
+                  0x00057a                  __fbopExit
+                  0x000582                  __fbopReturnNaN
+                  0x000588                  ___mulsf3
+                  0x0005f0                  _powf
+                  0x0007b6                  __frexpf
+                  0x0007d0                  _expf
+                  0x000894                  __fchop
+                  0x0008e2                  ___lesf2
+                  0x0008e2                  ___ltsf2
+                  0x0008e2                  ___eqsf2
+                  0x0008e6                  ___gtsf2
+                  0x0008e6                  ___gesf2
+                  0x0008ea                  ___fixsfsi
+                  0x00092c                  ___floatdisf
+                  0x00094c                  ___floatundisf
+                  0x0009aa                  _ldexpf
+                  0x0009ee                  _logf
+                  0x000a9c                  __fcompare
+                  0x000ad2                  _strlen
+                  0x000b64                  _InitUART2
+                  0x000bcc                  _XmitUART2
+                  0x000c04                  _Disp2Hex
+                  0x000c62                  _Disp2Hex32
+                  0x000cd0                  _Disp2Dec
+                  0x000d30                  _Disp2String
+                  0x000d52                  _IOinit
+                  0x000d68                  _CNinit
+                  0x000d7c                  _IOcheck
+                  0x000df8                  _displayVoltage
+                  0x000e20                  _displayResistance
+                  0x000e66                  _initADC
+                  0x000eb4                  _doADC
+                  0x000eec                  _NewClk
+                  0x000f60                  _delay_ms
+                  0x000f92                  _main
 
 External Symbols in Program Memory (by name):
 
-                  0x000d6a                  _CNinit
-                  0x000cd2                  _Disp2Dec
-                  0x000c06                  _Disp2Hex
-                  0x000c64                  _Disp2Hex32
-                  0x000d32                  _Disp2String
-                  0x000d7e                  _IOcheck
-                  0x000d54                  _IOinit
-                  0x000b66                  _InitUART2
-                  0x000ee4                  _NewClk
-                  0x000bce                  _XmitUART2
+                  0x000d68                  _CNinit
+                  0x000cd0                  _Disp2Dec
+                  0x000c04                  _Disp2Hex
+                  0x000c62                  _Disp2Hex32
+                  0x000d30                  _Disp2String
+                  0x000d7c                  _IOcheck
+                  0x000d52                  _IOinit
+                  0x000b64                  _InitUART2
+                  0x000eec                  _NewClk
+                  0x000bcc                  _XmitUART2
                   0x0002c8                  __ADC1Interrupt
                   0x000330                  __CNInterrupt
-                  0x000368                  __DefaultInterrupt
-                  0x000360                  __T2Interrupt
+                  0x00035c                  __DefaultInterrupt
+                  0x000354                  __T2Interrupt
                   0x000320                  __U2RXInterrupt
                   0x000328                  __U2TXInterrupt
-                  0x000370                  ___addsf3
-                  0x00042a                  ___divsf3
-                  0x0008ee                  ___eqsf2
-                  0x0008f6                  ___fixsfsi
-                  0x0004ae                  ___fixunssfsi
-                  0x000938                  ___floatdisf
-                  0x0004e4                  ___floatsisf
-                  0x000958                  ___floatundisf
-                  0x0004ea                  ___floatunsisf
-                  0x0008f2                  ___gesf2
-                  0x0008f2                  ___gtsf2
-                  0x0008ee                  ___lesf2
-                  0x0008ee                  ___ltsf2
-                  0x000594                  ___mulsf3
-                  0x00036e                  ___subsf3
+                  0x000364                  ___addsf3
+                  0x00041e                  ___divsf3
+                  0x0008e2                  ___eqsf2
+                  0x0008ea                  ___fixsfsi
+                  0x0004a2                  ___fixunssfsi
+                  0x00092c                  ___floatdisf
+                  0x0004d8                  ___floatsisf
+                  0x00094c                  ___floatundisf
+                  0x0004de                  ___floatunsisf
+                  0x0008e6                  ___gesf2
+                  0x0008e6                  ___gtsf2
+                  0x0008e2                  ___lesf2
+                  0x0008e2                  ___ltsf2
+                  0x000588                  ___mulsf3
+                  0x000362                  ___subsf3
                   0x000252                  __data_init
                   0x000252                  __data_init_standard
-                  0x000574                  __fPropagateNaN
-                  0x000586                  __fbopExit
-                  0x00058e                  __fbopReturnNaN
-                  0x0008a0                  __fchop
-                  0x000aa8                  __fcompare
-                  0x0004ee                  __fpack
-                  0x0007c2                  __frexpf
-                  0x00053a                  __funpack
-                  0x000564                  __funpack2
+                  0x000568                  __fPropagateNaN
+                  0x00057a                  __fbopExit
+                  0x000582                  __fbopReturnNaN
+                  0x000894                  __fchop
+                  0x000a9c                  __fcompare
+                  0x0004e2                  __fpack
+                  0x0007b6                  __frexpf
+                  0x00052e                  __funpack
+                  0x000558                  __funpack2
                   0x00023c                  __psv_init
                   0x000200                  __resetPRI
-                  0x000f58                  _delay_ms
-                  0x000e18                  _displayResistance
-                  0x000df0                  _displayVoltage
-                  0x000eac                  _doADC
-                  0x0007dc                  _expf
-                  0x000e5e                  _initADC
-                  0x0009b6                  _ldexpf
-                  0x0009fa                  _logf
-                  0x000f9e                  _main
-                  0x0005fc                  _powf
-                  0x000ade                  _strlen
+                  0x000f60                  _delay_ms
+                  0x000e20                  _displayResistance
+                  0x000df8                  _displayVoltage
+                  0x000eb4                  _doADC
+                  0x0007d0                  _expf
+                  0x000e66                  _initADC
+                  0x0009aa                  _ldexpf
+                  0x0009ee                  _logf
+                  0x000f92                  _main
+                  0x0005f0                  _powf
+                  0x000ad2                  _strlen
 
 Memory Configuration
 
@@ -324,7 +321,7 @@ LOAD c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libfx-elf.a
                   0x000002          0x2 SHORT 0x0 ((ABSOLUTE (__reset) >> 0x10) & 0x7f)
                   0x000003          0x2 SHORT 0x0
 
-.text             0x000200        0x8ea
+.text             0x000200        0x8de
  *(.init)
  .init            0x000200         0x4c c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
                   0x000200                  __resetPRI
@@ -341,84 +338,84 @@ LOAD c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libfx-elf.a
  .isr.text        0x000320         0x10 build/default/production/UART2.o
                   0x000320                  __U2RXInterrupt
                   0x000328                  __U2TXInterrupt
- .isr.text        0x000330         0x30 build/default/production/Ios.o
+ .isr.text        0x000330         0x24 build/default/production/Ios.o
                   0x000330                  __CNInterrupt
- .isr.text        0x000360          0x8 build/default/production/TimeDelay.o
-                  0x000360                  __T2Interrupt
- .isr             0x000368          0x4 default_isr
-                  0x000368                  __DefaultInterrupt
+ .isr.text        0x000354          0x8 build/default/production/TimeDelay.o
+                  0x000354                  __T2Interrupt
+ .isr             0x00035c          0x4 default_isr
+                  0x00035c                  __DefaultInterrupt
  *(.libc)
  *(.libm)
  *(.libdsp)
  *(.lib*)
  .libpic30_crt_start_mode
-                  0x00036c          0x2 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\liblega-pic30-elf.a(crt_start_mode_normal.Leo)
-                  0x00036c                  __crt_start_mode
-                  0x00036c                  __crt_start_mode_normal
- .libm.subsf3     0x00036e         0xbc c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(addsf3.eo)
-                  0x00036e                  ___subsf3
-                  0x000370                  ___addsf3
- .libm.divfs3     0x00042a         0x84 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(divsf3.eo)
-                  0x00042a                  ___divsf3
+                  0x000360          0x2 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\liblega-pic30-elf.a(crt_start_mode_normal.Leo)
+                  0x000360                  __crt_start_mode
+                  0x000360                  __crt_start_mode_normal
+ .libm.subsf3     0x000362         0xbc c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(addsf3.eo)
+                  0x000362                  ___subsf3
+                  0x000364                  ___addsf3
+ .libm.divfs3     0x00041e         0x84 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(divsf3.eo)
+                  0x00041e                  ___divsf3
  .libm.fixunssfsi
-                  0x0004ae         0x36 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(fixunssfsi.eo)
-                  0x0004ae                  ___fixunssfsi
+                  0x0004a2         0x36 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(fixunssfsi.eo)
+                  0x0004a2                  ___fixunssfsi
  .libm.floatsisf
-                  0x0004e4          0x6 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(floatsisf.eo)
-                  0x0004e4                  ___floatsisf
+                  0x0004d8          0x6 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(floatsisf.eo)
+                  0x0004d8                  ___floatsisf
  .libm.floatunsisf
-                  0x0004ea          0x4 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(floatunsisf.eo)
-                  0x0004ea                  ___floatunsisf
- .libm.fpack      0x0004ee         0x4c c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(fpack.eo)
-                  0x0004ee                  __fpack
- .libm.funpack    0x00053a         0x2a c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(funpack.eo)
-                  0x00053a                  __funpack
+                  0x0004de          0x4 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(floatunsisf.eo)
+                  0x0004de                  ___floatunsisf
+ .libm.fpack      0x0004e2         0x4c c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(fpack.eo)
+                  0x0004e2                  __fpack
+ .libm.funpack    0x00052e         0x2a c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(funpack.eo)
+                  0x00052e                  __funpack
  .libm.funpack2
-                  0x000564         0x10 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(funpack2.eo)
-                  0x000564                  __funpack2
+                  0x000558         0x10 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(funpack2.eo)
+                  0x000558                  __funpack2
  .libm.fPropagateNaN
-                  0x000574         0x12 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(futil.eo)
-                  0x000574                  __fPropagateNaN
+                  0x000568         0x12 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(futil.eo)
+                  0x000568                  __fPropagateNaN
  .libm.fbobExit
-                  0x000586          0x8 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(futil.eo)
-                  0x000586                  __fbopExit
+                  0x00057a          0x8 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(futil.eo)
+                  0x00057a                  __fbopExit
  .libm.fbopReturnNaN
-                  0x00058e          0x6 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(futil.eo)
-                  0x00058e                  __fbopReturnNaN
- .libm.mulsf3     0x000594         0x68 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(mulsf3.eo)
-                  0x000594                  ___mulsf3
- .libm.powf       0x0005fc        0x1c6 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(powf.eo)
-                  0x0005fc                  _powf
- .libm.frexpf     0x0007c2         0x1a c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(_frexpf.eo)
-                  0x0007c2                  __frexpf
- .libm.expf       0x0007dc         0xc4 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(expf.eo)
-                  0x0007dc                  _expf
- .libm.fchop      0x0008a0         0x4e c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(fchop.eo)
-                  0x0008a0                  __fchop
- .libm.eqsf2      0x0008ee          0x4 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(feqltle.eo)
-                  0x0008ee                  ___eqsf2
-                  0x0008ee                  ___ltsf2
-                  0x0008ee                  ___lesf2
- .libm.gtsf2      0x0008f2          0x4 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(fgtge.eo)
-                  0x0008f2                  ___gesf2
-                  0x0008f2                  ___gtsf2
- .libm.fixsfsi    0x0008f6         0x42 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(fixsfsi.eo)
-                  0x0008f6                  _(float, int, long long, short, float, short, int)
+                  0x000582          0x6 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(futil.eo)
+                  0x000582                  __fbopReturnNaN
+ .libm.mulsf3     0x000588         0x68 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(mulsf3.eo)
+                  0x000588                  ___mulsf3
+ .libm.powf       0x0005f0        0x1c6 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(powf.eo)
+                  0x0005f0                  _powf
+ .libm.frexpf     0x0007b6         0x1a c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(_frexpf.eo)
+                  0x0007b6                  __frexpf
+ .libm.expf       0x0007d0         0xc4 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(expf.eo)
+                  0x0007d0                  _expf
+ .libm.fchop      0x000894         0x4e c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(fchop.eo)
+                  0x000894                  __fchop
+ .libm.eqsf2      0x0008e2          0x4 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(feqltle.eo)
+                  0x0008e2                  ___eqsf2
+                  0x0008e2                  ___ltsf2
+                  0x0008e2                  ___lesf2
+ .libm.gtsf2      0x0008e6          0x4 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(fgtge.eo)
+                  0x0008e6                  ___gesf2
+                  0x0008e6                  ___gtsf2
+ .libm.fixsfsi    0x0008ea         0x42 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(fixsfsi.eo)
+                  0x0008ea                  _(float, int, long long, short, float, short, int)
  .libm.floatdisf
-                  0x000938         0x20 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(floatdisf.eo)
-                  0x000938                  ___floatdisf
+                  0x00092c         0x20 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(floatdisf.eo)
+                  0x00092c                  ___floatdisf
  .libm.floatundisf
-                  0x000958         0x5e c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(floatundisf.eo)
-                  0x000958                  ___floatundisf
- .libm.ldexpf     0x0009b6         0x44 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(ldexpf.eo)
-                  0x0009b6                  _ldexpf
- .libm.logf       0x0009fa         0xae c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(logf.eo)
-                  0x0009fa                  _logf
+                  0x00094c         0x5e c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(floatundisf.eo)
+                  0x00094c                  ___floatundisf
+ .libm.ldexpf     0x0009aa         0x44 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(ldexpf.eo)
+                  0x0009aa                  _ldexpf
+ .libm.logf       0x0009ee         0xae c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(logf.eo)
+                  0x0009ee                  _logf
  .libm.fcompare
-                  0x000aa8         0x36 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(fcompare.eo)
-                  0x000aa8                  __fcompare
- .libc.strlen     0x000ade          0xc c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\liblega-c-elf.a(strlen.XX_eo)
-                  0x000ade                  _strlen
+                  0x000a9c         0x36 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(fcompare.eo)
+                  0x000a9c                  __fcompare
+ .libc.strlen     0x000ad2          0xc c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\liblega-c-elf.a(strlen.XX_eo)
+                  0x000ad2                  _strlen
 
 usercode
  *(usercode)
@@ -450,33 +447,33 @@ __FDS
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x3cba
+.debug_info       0x000000       0x3c9b
  *(.debug_info)
  .debug_info      0x000000        0x144 build/default/production/newmainXC16.o
  .debug_info      0x000144       0x10e9 build/default/production/ADC.o
  .debug_info      0x00122d        0x53b build/default/production/ChangeClk.o
  .debug_info      0x001768        0xe61 build/default/production/UART2.o
- .debug_info      0x0025c9       0x10d9 build/default/production/Ios.o
- .debug_info      0x0036a2        0x618 build/default/production/TimeDelay.o
+ .debug_info      0x0025c9       0x10ba build/default/production/Ios.o
+ .debug_info      0x003683        0x618 build/default/production/TimeDelay.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0x583
+.debug_abbrev     0x000000        0x572
  *(.debug_abbrev)
  .debug_abbrev    0x000000         0x36 build/default/production/newmainXC16.o
  .debug_abbrev    0x000036         0xeb build/default/production/ADC.o
  .debug_abbrev    0x000121        0x123 build/default/production/ChangeClk.o
  .debug_abbrev    0x000244        0x114 build/default/production/UART2.o
- .debug_abbrev    0x000358        0x140 build/default/production/Ios.o
- .debug_abbrev    0x000498         0xeb build/default/production/TimeDelay.o
+ .debug_abbrev    0x000358        0x12f build/default/production/Ios.o
+ .debug_abbrev    0x000487         0xeb build/default/production/TimeDelay.o
 
-.debug_line       0x000000        0x5a3
+.debug_line       0x000000        0x5a4
  *(.debug_line)
  .debug_line      0x000000         0x3f build/default/production/newmainXC16.o
  .debug_line      0x00003f        0x10e build/default/production/ADC.o
  .debug_line      0x00014d         0xea build/default/production/ChangeClk.o
  .debug_line      0x000237        0x152 build/default/production/UART2.o
- .debug_line      0x000389        0x11f build/default/production/Ios.o
- .debug_line      0x0004a8         0xfb build/default/production/TimeDelay.o
+ .debug_line      0x000389        0x120 build/default/production/Ios.o
+ .debug_line      0x0004a9         0xfb build/default/production/TimeDelay.o
 
 .debug_frame      0x000000        0x2f2
  *(.debug_frame)
@@ -487,13 +484,13 @@ __FDS
  .debug_frame     0x0001ce         0xdc build/default/production/Ios.o
  .debug_frame     0x0002aa         0x48 build/default/production/TimeDelay.o
 
-.debug_str        0x000000        0x1a2
+.debug_str        0x000000        0x198
  *(.debug_str)
  .debug_str       0x000000         0x87 build/default/production/ADC.o
  .debug_str       0x000087         0x16 build/default/production/ChangeClk.o
  .debug_str       0x00009d         0x4e build/default/production/UART2.o
- .debug_str       0x0000eb         0x92 build/default/production/Ios.o
- .debug_str       0x00017d         0x25 build/default/production/TimeDelay.o
+ .debug_str       0x0000eb         0x88 build/default/production/Ios.o
+ .debug_str       0x000173         0x25 build/default/production/TimeDelay.o
 
 .debug_loc
  *(.debug_loc)
@@ -502,7 +499,7 @@ __FDS
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000        0x1b7
+                  0x000000        0x1a9
  *(.debug_pubnames)
  .debug_pubnames
                   0x000000         0x1b build/default/production/newmainXC16.o
@@ -513,9 +510,9 @@ __FDS
  .debug_pubnames
                   0x000073         0x98 build/default/production/UART2.o
  .debug_pubnames
-                  0x00010b         0x7c build/default/production/Ios.o
+                  0x00010b         0x6e build/default/production/Ios.o
  .debug_pubnames
-                  0x000187         0x30 build/default/production/TimeDelay.o
+                  0x000179         0x30 build/default/production/TimeDelay.o
 
 .debug_ranges
  *(.debug_ranges)
@@ -1025,13 +1022,11 @@ __c30_signature
  __c30_signature
                   0x0006df          0x6 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\liblega-c-elf.a(strlen.XX_eo)
 
-.nbss               0x0800          0x6
+.nbss               0x0800          0x4
  .nbss              0x0800          0x2 build/default/production/UART2.o
                     0x0800                  _clkval
- .nbss              0x0802          0x2 build/default/production/Ios.o
-                    0x0802                  _PUSH_FLAG
- .nbss              0x0804          0x2 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(errno.eo)
-                    0x0804                  _errno
+ .nbss              0x0802          0x2 c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a(errno.eo)
+                    0x0802                  _errno
 
 .config_FCKSM     0xf80008          0x2
  .config_FCKSM    0xf80008          0x2 build/default/production/newmainXC16.o
@@ -1061,34 +1056,32 @@ __c30_signature
  .ivt._T2Interrupt
                   0x000022          0x2 build/default/production/TimeDelay.o
 
-.const              0x8aea         0x7c load address 0x000aea  
- .const             0x8aea         0x7c build/default/production/Ios.o
+.const              0x8ade         0x86 load address 0x000ade  
+ .const             0x8ade         0x86 build/default/production/Ios.o
 
-.text             0x000b66        0x424
- .text            0x000b66        0x1ee build/default/production/UART2.o
-                  0x000b66                  _InitUART2
-                  0x000bce                  _XmitUART2
-                  0x000c06                  _Disp2Hex
-                  0x000c64                  _Disp2Hex32
-                  0x000cd2                  _Disp2Dec
-                  0x000d32                  _Disp2String
- .text            0x000d54        0x10a build/default/production/Ios.o
-                  0x000d54                  _IOinit
-                  0x000d6a                  _CNinit
-                  0x000d7e                  _IOcheck
-                  0x000df0                  _displayVoltage
-                  0x000e18                  _displayResistance
- .text            0x000e5e         0x86 build/default/production/ADC.o
-                  0x000e5e                  _initADC
-                  0x000eac                  _doADC
- .text            0x000ee4         0x74 build/default/production/ChangeClk.o
-                  0x000ee4                  _NewClk
- .text            0x000f58         0x32 build/default/production/TimeDelay.o
-                  0x000f58                  _delay_ms
+.text             0x000b64        0x43c
+ .text            0x000b64        0x1ee build/default/production/UART2.o
+                  0x000b64                  _InitUART2
+                  0x000bcc                  _XmitUART2
+                  0x000c04                  _Disp2Hex
+                  0x000c62                  _Disp2Hex32
+                  0x000cd0                  _Disp2Dec
+                  0x000d30                  _Disp2String
+ .text            0x000d52        0x114 build/default/production/Ios.o
+                  0x000d52                  _IOinit
+                  0x000d68                  _CNinit
+                  0x000d7c                  _IOcheck
+                  0x000df8                  _displayVoltage
+                  0x000e20                  _displayResistance
+ .text            0x000e66         0x86 build/default/production/ADC.o
+                  0x000e66                  _initADC
+                  0x000eb4                  _doADC
+ .text            0x000eec         0x74 build/default/production/ChangeClk.o
+                  0x000eec                  _NewClk
+ .text            0x000f60         0x32 build/default/production/TimeDelay.o
+                  0x000f60                  _delay_ms
+ .text            0x000f92          0xe build/default/production/newmainXC16.o
+                  0x000f92                  _main
 
-.dinit            0x000f8a         0x14
- .dinit           0x000f8a         0x14 data_init
-
-.text             0x000f9e          0xe
- .text            0x000f9e          0xe build/default/production/newmainXC16.o
-                  0x000f9e                  _main
+.dinit            0x000fa0          0xe
+ .dinit           0x000fa0          0xe data_init

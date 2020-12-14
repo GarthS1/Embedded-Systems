@@ -50,7 +50,7 @@ void setUpTimer() {
 // Used in HW IO control Driver project 3
 void __attribute__((interrupt, no_auto_psv)) _T2Interrupt(void)
 {
-     IFS0bits.T2IF=0; //Clear timer 2 interrupt flag
+     IFS0bits.T2IF = 0; //Clear timer 2 interrupt flag
     
     // TMR2flag = 1; // optional global variable created by user
     return;
