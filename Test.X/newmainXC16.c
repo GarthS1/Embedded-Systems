@@ -32,7 +32,15 @@ int main(void) {
     CNinit();   //Initialize change notification
     InitUART2();   //Initialize UART2
     
+//    Change Clock
+    NewClk(8); // 8 for 8 MHz; 500 for 500 kHz; 32 for 32 kHz
 
+    //Clock output on REFO/RB15 ? PULSE GEN Testing purposes only
+    TRISBbits.TRISB15 = 0; // Set RB15 as output for REFO
+    REFOCONbits.ROSSLP = 1; // Ref oscillator is disabled in sleep
+    REFOCONbits.ROSEL = 0; // Output base clk showing clock switching
+    REFOCONbits.RODIV = 0b0011;
+    REFOCONbits.ROEN = 1; // Ref oscillator is enabled 
 
     while(1) {}
     
