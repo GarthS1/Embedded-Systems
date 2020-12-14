@@ -36,6 +36,17 @@ void delay_ms(uint16_t time_ms, uint8_t idle_on)
     return;
 }
 
+
+void setUpTimer() {
+    T2CONbits.TSIDL = 0; //operate in idle mode
+    T2CONbits.T32 = 0; // operate timer 2 as 16 bit timer
+    T2CONbits.TCS = 1; // use internal clock
+    
+    IPC1bits.T2IP = 2; //7 is highest and 1 is lowest priority
+    IEC0bits.T2IE = 1; //enable timer interrupt
+    IFS0bits.T2IF = 0; // Clear timer 2 flaf
+}
+
 // Used in HW IO control Driver project 3
 void __attribute__((interrupt, no_auto_psv)) _T2Interrupt(void)
 {
