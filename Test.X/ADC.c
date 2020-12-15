@@ -48,7 +48,7 @@ void doADC(int ANNUMBER) {
         TRISBbits.TRISB13 = 1;  //Enable RB13 as ADC input
         AD1CHSbits.CH0SA = 0b1011;  //Enable AN11 or pin number 16 to ADC input
     } else if(ANNUMBER == 12) {
-        AD1PCFGbits.PCFG11 = 0; //Disable digital IO on pin 16.
+        AD1PCFGbits.PCFG12 = 0; //Disable digital IO on pin 16.
         TRISBbits.TRISB12 = 1;  //Enable RB13 as ADC input
         AD1CHSbits.CH0SA = 0b1100;  //Enable AN12 or pin number 16 to ADC input
     }
