@@ -89,6 +89,10 @@ void displayPulse(uint16_t value) {
     {
         //start timer
         T2CONbits.TON=1; //Start 16-bit Timer2
+        T2CONbits.TSIDL=0; //continue module operation in idle mode 
+        T2CONbits.T32=0; //Timer2 and timer3 act as two 16-bit timers
+        T2CONbits.TCS=0; //set internal clock(Fosc/2)
+        
 
     }
     
