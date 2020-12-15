@@ -85,6 +85,13 @@ void displayPulse(uint16_t value) {
     NewClk(32);
     uint16_t freq = 0;
     uint16_t amplitude = value*(VREF/(pow(2,10)-1));  //Vin = Vref * ADCBUF/(2^10 - 1);
+    while(amplitude)
+    {
+        //start timer
+        T2CONbits.TON=1; //Start 16-bit Timer2
+
+    }
+    
     Disp2String(" \r PULSEMETER Freq="); 
     Disp2Dec(freq);
     Disp2String("kHz, Amplitude="); 
