@@ -187,11 +187,11 @@ External Symbols in Program Memory (by address):
                   0x000824                  __frexpf
                   0x00083e                  _expf
                   0x000902                  __fchop
+                  0x000950                  ___ltsf2
                   0x000950                  ___eqsf2
                   0x000950                  ___lesf2
-                  0x000950                  ___ltsf2
-                  0x000954                  ___gtsf2
                   0x000954                  ___gesf2
+                  0x000954                  ___gtsf2
                   0x000958                  ___fixsfsi
                   0x00099a                  ___floatdisf
                   0x0009ba                  ___floatundisf
@@ -217,7 +217,7 @@ External Symbols in Program Memory (by address):
                   0x000fb0                  _delay_ms
                   0x000fe2                  _configureTimer1
                   0x001008                  _configureTimer3
-                  0x00102a                  _configureTimer
+                  0x00102a                  _startTimer
                   0x001038                  _NewClk
                   0x0010bc                  _main
 
@@ -270,7 +270,6 @@ External Symbols in Program Memory (by name):
                   0x00023c                  __psv_init
                   0x000200                  __resetPRI
                   0x000eec                  _calculateFrequency
-                  0x00102a                  _configureTimer
                   0x000fe2                  _configureTimer1
                   0x001008                  _configureTimer3
                   0x000fb0                  _delay_ms
@@ -284,6 +283,7 @@ External Symbols in Program Memory (by name):
                   0x000a5c                  _logf
                   0x0010bc                  _main
                   0x00065e                  _powf
+                  0x00102a                  _startTimer
                   0x000b40                  _strlen
 
 Memory Configuration
@@ -467,24 +467,24 @@ __FDS
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x46f9
+.debug_info       0x000000       0x46ce
  *(.debug_info)
- .debug_info      0x000000       0x1110 build/default/production/ADC.o
- .debug_info      0x001110        0x555 build/default/production/ChangeClk.o
- .debug_info      0x001665       0x11b8 build/default/production/Ios.o
- .debug_info      0x00281d        0x3c4 build/default/production/newmainXC16.o
- .debug_info      0x002be1        0xcb7 build/default/production/TimeDelay.o
- .debug_info      0x003898        0xe61 build/default/production/UART2.o
+ .debug_info      0x000000       0x10e9 build/default/production/ADC.o
+ .debug_info      0x0010e9        0x555 build/default/production/ChangeClk.o
+ .debug_info      0x00163e       0x11b8 build/default/production/Ios.o
+ .debug_info      0x0027f6        0x3c4 build/default/production/newmainXC16.o
+ .debug_info      0x002bba        0xcb3 build/default/production/TimeDelay.o
+ .debug_info      0x00386d        0xe61 build/default/production/UART2.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0x690
+.debug_abbrev     0x000000        0x671
  *(.debug_abbrev)
- .debug_abbrev    0x000000        0x10a build/default/production/ADC.o
- .debug_abbrev    0x00010a        0x134 build/default/production/ChangeClk.o
- .debug_abbrev    0x00023e        0x164 build/default/production/Ios.o
- .debug_abbrev    0x0003a2         0xc7 build/default/production/newmainXC16.o
- .debug_abbrev    0x000469        0x113 build/default/production/TimeDelay.o
- .debug_abbrev    0x00057c        0x114 build/default/production/UART2.o
+ .debug_abbrev    0x000000         0xeb build/default/production/ADC.o
+ .debug_abbrev    0x0000eb        0x134 build/default/production/ChangeClk.o
+ .debug_abbrev    0x00021f        0x164 build/default/production/Ios.o
+ .debug_abbrev    0x000383         0xc7 build/default/production/newmainXC16.o
+ .debug_abbrev    0x00044a        0x113 build/default/production/TimeDelay.o
+ .debug_abbrev    0x00055d        0x114 build/default/production/UART2.o
 
 .debug_line       0x000000        0x692
  *(.debug_line)
@@ -520,7 +520,7 @@ __FDS
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000        0x24b
+                  0x000000        0x247
  *(.debug_pubnames)
  .debug_pubnames
                   0x000000         0x3b build/default/production/ADC.o
@@ -531,9 +531,9 @@ __FDS
  .debug_pubnames
                   0x0000fc         0x2a build/default/production/newmainXC16.o
  .debug_pubnames
-                  0x000126         0x8d build/default/production/TimeDelay.o
+                  0x000126         0x89 build/default/production/TimeDelay.o
  .debug_pubnames
-                  0x0001b3         0x98 build/default/production/UART2.o
+                  0x0001af         0x98 build/default/production/UART2.o
 
 .debug_ranges
  *(.debug_ranges)
@@ -1117,7 +1117,7 @@ __c30_signature
                   0x000fb0                  _delay_ms
                   0x000fe2                  _configureTimer1
                   0x001008                  _configureTimer3
-                  0x00102a                  _configureTimer
+                  0x00102a                  _startTimer
  .text            0x001038         0x84 build/default/production/ChangeClk.o
                   0x001038                  _NewClk
  .text            0x0010bc         0x26 build/default/production/newmainXC16.o

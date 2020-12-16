@@ -38,7 +38,7 @@ void delay_ms(uint16_t time_ms, uint8_t idle_on)
 
 void configureTimer1() {
     T1CONbits.TSIDL = 0;    //Continue operation in idle mode
-    T1CONbits.TCKPS = 11;   //Highest clock resolution
+    T1CONbits.TCKPS = 0b11;   //Highest clock resolution
     T1CONbits.TCS = 0;      //Clock source is internal clock
     T1CONbits.TGATE = 1;    //Enable gated time accumulation  Only count pulse when high, when low, throw interrupt
     //Do I need to trigger gated time accumilation?
@@ -51,16 +51,16 @@ void configureTimer1() {
 
 void configureTimer3() {
     T3CONbits.TSIDL = 0;    //Continue operation in idle mode
-    T3CONbits.TCKPS = 11;   //Highest timer 3 resolution
+    T3CONbits.TCKPS = 0b11;   //Highest timer 3 resolution
     T3CONbits.TCS = 1;      //Clock source is pin 18
     //Need to configure timer 3 interrupt
     IPC2bits.T3IP = 7;  //Timer 3 interrupt priority is 7
     IEC0bits.T3IE = 1; //enable timer interrupt     //Not sure if this actually interrupts or not
     IFS0bits.T3IF = 0;  //Clear interrupt flag
     TMR3 = 0;
-    PR3 = 100;  //For the sake of simplicity, might need to change
+    PR3 = 1000;  //For the sake of simplicity, might need to change
 }
-void configureTimer() {
+void startTimer() {
     configureTimer1();
     configureTimer3();
     T1CONbits.TON = 1;  //Start timer 1
