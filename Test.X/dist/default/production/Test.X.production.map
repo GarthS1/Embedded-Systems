@@ -117,10 +117,10 @@ section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200               0x94c           0xdf2  (3570)
 .const                       0xb4c                0x7a            0xb7  (183)
-.text                        0xbc6               0x51c           0x7aa  (1962)
-.dinit                      0x10e2                0x1a            0x27  (39)
+.text                        0xbc6               0x51e           0x7ad  (1965)
+.dinit                      0x10e4                0x1a            0x27  (39)
 
-                 Total "program" memory used (bytes):         0x167a  (5754) 35%
+                 Total "program" memory used (bytes):         0x167d  (5757) 35%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x600]
@@ -211,15 +211,15 @@ External Symbols in Program Memory (by address):
                   0x000e4e                  _displayVoltage
                   0x000e76                  _displayResistance
                   0x000ebc                  _displayPulse
-                  0x000eec                  _calculateFrequency
-                  0x000f14                  _initADC
-                  0x000f62                  _doADC
-                  0x000fb0                  _delay_ms
-                  0x000fe2                  _configureTimer1
-                  0x001008                  _configureTimer3
-                  0x00102a                  _startTimer
-                  0x001038                  _NewClk
-                  0x0010bc                  _main
+                  0x000eee                  _calculateFrequency
+                  0x000f16                  _initADC
+                  0x000f64                  _doADC
+                  0x000fb2                  _delay_ms
+                  0x000fe4                  _configureTimer1
+                  0x00100a                  _configureTimer3
+                  0x00102c                  _startTimer
+                  0x00103a                  _NewClk
+                  0x0010be                  _main
 
 External Symbols in Program Memory (by name):
 
@@ -231,7 +231,7 @@ External Symbols in Program Memory (by name):
                   0x000dde                  _IOcheck
                   0x000db4                  _IOinit
                   0x000bc6                  _InitUART2
-                  0x001038                  _NewClk
+                  0x00103a                  _NewClk
                   0x000c2e                  _XmitUART2
                   0x0002c8                  __ADC1Interrupt
                   0x00033e                  __CNInterrupt
@@ -269,21 +269,21 @@ External Symbols in Program Memory (by name):
                   0x0005c6                  __funpack2
                   0x00023c                  __psv_init
                   0x000200                  __resetPRI
-                  0x000eec                  _calculateFrequency
-                  0x000fe2                  _configureTimer1
-                  0x001008                  _configureTimer3
-                  0x000fb0                  _delay_ms
+                  0x000eee                  _calculateFrequency
+                  0x000fe4                  _configureTimer1
+                  0x00100a                  _configureTimer3
+                  0x000fb2                  _delay_ms
                   0x000ebc                  _displayPulse
                   0x000e76                  _displayResistance
                   0x000e4e                  _displayVoltage
-                  0x000f62                  _doADC
+                  0x000f64                  _doADC
                   0x00083e                  _expf
-                  0x000f14                  _initADC
+                  0x000f16                  _initADC
                   0x000a18                  _ldexpf
                   0x000a5c                  _logf
-                  0x0010bc                  _main
+                  0x0010be                  _main
                   0x00065e                  _powf
-                  0x00102a                  _startTimer
+                  0x00102c                  _startTimer
                   0x000b40                  _strlen
 
 Memory Configuration
@@ -486,14 +486,14 @@ __FDS
  .debug_abbrev    0x00044a        0x113 build/default/production/TimeDelay.o
  .debug_abbrev    0x00055d        0x114 build/default/production/UART2.o
 
-.debug_line       0x000000        0x692
+.debug_line       0x000000        0x693
  *(.debug_line)
  .debug_line      0x000000        0x115 build/default/production/ADC.o
  .debug_line      0x000115         0xf0 build/default/production/ChangeClk.o
- .debug_line      0x000205        0x12e build/default/production/Ios.o
- .debug_line      0x000333         0xea build/default/production/newmainXC16.o
- .debug_line      0x00041d        0x123 build/default/production/TimeDelay.o
- .debug_line      0x000540        0x152 build/default/production/UART2.o
+ .debug_line      0x000205        0x12f build/default/production/Ios.o
+ .debug_line      0x000334         0xea build/default/production/newmainXC16.o
+ .debug_line      0x00041e        0x123 build/default/production/TimeDelay.o
+ .debug_line      0x000541        0x152 build/default/production/UART2.o
 
 .debug_frame      0x000000        0x3f0
  *(.debug_frame)
@@ -1094,7 +1094,7 @@ __c30_signature
 .const              0x8b4c         0x7a load address 0x000b4c  
  .const             0x8b4c         0x7a build/default/production/Ios.o
 
-.text             0x000bc6        0x51c
+.text             0x000bc6        0x51e
  .text            0x000bc6        0x1ee build/default/production/UART2.o
                   0x000bc6                  _InitUART2
                   0x000c2e                  _XmitUART2
@@ -1102,26 +1102,26 @@ __c30_signature
                   0x000cc4                  _Disp2Hex32
                   0x000d32                  _Disp2Dec
                   0x000d92                  _Disp2String
- .text            0x000db4        0x160 build/default/production/Ios.o
+ .text            0x000db4        0x162 build/default/production/Ios.o
                   0x000db4                  _IOinit
                   0x000dca                  _CNinit
                   0x000dde                  _IOcheck
                   0x000e4e                  _displayVoltage
                   0x000e76                  _displayResistance
                   0x000ebc                  _displayPulse
-                  0x000eec                  _calculateFrequency
- .text            0x000f14         0x9c build/default/production/ADC.o
-                  0x000f14                  _initADC
-                  0x000f62                  _doADC
- .text            0x000fb0         0x88 build/default/production/TimeDelay.o
-                  0x000fb0                  _delay_ms
-                  0x000fe2                  _configureTimer1
-                  0x001008                  _configureTimer3
-                  0x00102a                  _startTimer
- .text            0x001038         0x84 build/default/production/ChangeClk.o
-                  0x001038                  _NewClk
- .text            0x0010bc         0x26 build/default/production/newmainXC16.o
-                  0x0010bc                  _main
+                  0x000eee                  _calculateFrequency
+ .text            0x000f16         0x9c build/default/production/ADC.o
+                  0x000f16                  _initADC
+                  0x000f64                  _doADC
+ .text            0x000fb2         0x88 build/default/production/TimeDelay.o
+                  0x000fb2                  _delay_ms
+                  0x000fe4                  _configureTimer1
+                  0x00100a                  _configureTimer3
+                  0x00102c                  _startTimer
+ .text            0x00103a         0x84 build/default/production/ChangeClk.o
+                  0x00103a                  _NewClk
+ .text            0x0010be         0x26 build/default/production/newmainXC16.o
+                  0x0010be                  _main
 
-.dinit            0x0010e2         0x1a
- .dinit           0x0010e2         0x1a data_init
+.dinit            0x0010e4         0x1a
+ .dinit           0x0010e4         0x1a data_init

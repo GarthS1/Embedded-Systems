@@ -10,6 +10,7 @@
 #include "UART2.h"
 #include "ADC.h"
 #include <math.h>
+#include "TimeDelay.h"
 #define VREF 3.2
 
 int PUSH_FLAG = 0;
@@ -82,6 +83,7 @@ void displayPulse(uint16_t value) {
     Disp2String("kHz, Amplitude="); 
     Disp2Dec(amplitude);
     Disp2String("V");
+    startTimer();
 }
 
 
