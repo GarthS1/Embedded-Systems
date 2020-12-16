@@ -8,6 +8,7 @@
 
 #include "xc.h"
 #include "TimeDelay.h"
+#include "Ios.h"
 
 
 void delay_ms(uint16_t time_ms, uint8_t idle_on)
@@ -31,13 +32,57 @@ void delay_ms(uint16_t time_ms, uint8_t idle_on)
     {
         Idle(); 
     }
-    T2CONbits.TON=0; // Stop timer
+    T2CONbits.TON = 0; // Stop timer
     return;
 }
 
-void __attribute__((interrupt, no_auto_psv)) _T2Interrupt(void)
-{
-     IFS0bits.T2IF=0; //Clear timer 2 interrupt flag
+void configureTimer1() {
+    T1CONbits.TSIDL = 0;    //Continue operation in idle mode
+    T1CONbits.TCKPS = 11;   //Highest clock resolution
+    T1CONbits.TCS = 0;      //Clock source is internal clock
+    T1CONbits.TGATE = 1;    //Enable gated time accumulation  Only count pulse when high, when low, throw interrupt
+    //Do I need to trigger gated time accumilation?
+    IEC0bits.T1IE = 1; //enable timer interrupt
+    IPC0bits.T1IP = 7;  //Interrupt priority 2
+    IFS0bits.T1IF = 0;  //Clear interrupt flag
+    TMR1 = 0;
+    PR1 = 100;  //For the sake of simplicity, might need to change
+}
+
+void configureTimer3() {
+    T3CONbits.TSIDL = 0;    //Continue operation in idle mode
+    T3CONbits.TCKPS = 11;   //Highest timer 3 resolution
+    T3CONbits.TCS = 1;      //Clock source is pin 18
+    //Need to configure timer 3 interrupt
+    IPC2bits.T3IP = 7;  //Timer 3 interrupt priority is 7
+    IEC0bits.T3IE = 1; //enable timer interrupt     //Not sure if this actually interrupts or not
+    IFS0bits.T3IF = 0;  //Clear interrupt flag
+    TMR3 = 0;
+    PR3 = 100;  //For the sake of simplicity, might need to change
+}
+void configureTimer() {
+    configureTimer1();
+    configureTimer3();
+    T1CONbits.TON = 1;  //Start timer 1
+    T3CONbits.TON = 1;  //Start timer 3
+}
+
+void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void) {
+    IFS0bits.T1IF = 0;  //Clear timer 1 interrupt flag
+    IEC0bits.T3IE = 0; //disable timer3 interrupt     
+    IEC0bits.T1IE = 1; //disable timer 1 interrupt
+    calculateFrequency();
+}
+
+void __attribute__((interrupt, no_auto_psv)) _T3Interrupt(void) {
+    IFS0bits.T3IF = 0;  //Clear timer 3 interrupt flag
+    IEC0bits.T3IE = 0; //disable timer3 interrupt     
+    IEC0bits.T1IE = 1; //disable timer 1 interrupt
+    calculateFrequency();
+}
+
+void __attribute__((interrupt, no_auto_psv)) _T2Interrupt(void) {
+    IFS0bits.T2IF = 0; //Clear timer 2 interrupt flag
     return;
 }
 

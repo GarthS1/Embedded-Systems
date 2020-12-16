@@ -5,24 +5,30 @@
 //clkval = 8 for 8MHz; 
 //clkval = 500 for 500kHz; 
 //clkval = 32 for 32kHz; 
+
+extern int clockSpeed;
 void NewClk(unsigned int clkval)  
 {
     char COSCNOSC;
     if (clkval == 8)  //8MHz
     {
         COSCNOSC = 0x00;
+        clockSpeed = 8000;
     }
     else if (clkval == 500) // 500 kHz
     {
         COSCNOSC = 0x66;
+        clockSpeed = 500;
     }
     else if (clkval== 32) //32 kHz
     {
         COSCNOSC = 0x55; 
+        clockSpeed = 32;
     }
     else // default 32 kHz
     {
         COSCNOSC = 0x55;
+        clockSpeed = 32;
     }
         // Switch clock to 500 kHz
      SRbits.IPL = 7;  //Disable interrupts

@@ -14,5 +14,7 @@ void CNinit(void);
 void displayVoltage(uint16_t value);
 
 void displayResistance(uint16_t value);
+
+void calculateFrequency();
 #endif	/* XC_HEADER_TEMPLATE_H */
 

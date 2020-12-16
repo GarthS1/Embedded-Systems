@@ -10,10 +10,10 @@
 #include "UART2.h"
 #include "ADC.h"
 #include <math.h>
-
 #define VREF 3.2
 
 int PUSH_FLAG = 0;
+extern int clockSpeed;
 //This function initializes IO ports.
 void IOinit() {
     AD1PCFG = 0xFFFF; // Turn all analog pins as digital
@@ -94,6 +94,12 @@ void __attribute__((interrupt, no_auto_psv)) _CNInterrupt(void) {
     if(PUSH_FLAG)
         IOcheck();
     Nop();	 
+}
+
+void calculateFrequency() {
+    //Calculate frequency based on TMR1 AND TMR3 value
+    int freq = (TMR3 * 2) / (TMR1 * 2 / clockSpeed);     //Might need to change int to float, unit of freq is kHz
+    Disp2Dec(freq);
 }
 
 
