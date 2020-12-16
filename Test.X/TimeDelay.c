@@ -46,7 +46,7 @@ void configureTimer1() {
     IPC0bits.T1IP = 7;  //Interrupt priority 2
     IFS0bits.T1IF = 0;  //Clear interrupt flag
     TMR1 = 0;
-    PR1 = 1000;  //For the sake of simplicity, might need to change
+    PR1 = 1000;  //For the sake of simplicity, might need to change, ideally this should be free running but we set it at 1000 for now
 }
 
 void configureTimer3() {
@@ -58,7 +58,7 @@ void configureTimer3() {
     IEC0bits.T3IE = 1; //enable timer interrupt     //Not sure if this actually interrupts or not
     IFS0bits.T3IF = 0;  //Clear interrupt flag
     TMR3 = 0;
-    PR3 = 1000;  //For the sake of simplicity, might need to change
+    PR3 = 1000;  //For the sake of simplicity, might need to change, ideally this should be free running but we set it at 1000 for now
 }
 void startTimer() {
     configureTimer1();
