@@ -46,7 +46,7 @@ void configureTimer1() {
     IPC0bits.T1IP = 7;  //Interrupt priority 2
     IFS0bits.T1IF = 0;  //Clear interrupt flag
     TMR1 = 0;
-    PR1 = 100;  //For the sake of simplicity, might need to change
+    PR1 = 1000;  //For the sake of simplicity, might need to change
 }
 
 void configureTimer3() {
