@@ -1,7 +1,12 @@
-# Embedded-Systems
-Projects for an embedded systems course done in a group of three people. 
+# Embedded System Interfacing
+The following projects are projects done in Embedded System Interfacing Course of University of Calgary. We used PIC24F16KA101 to test and run the program. For more information about the hardware, please refer to the following website: [PIC24F16KA102 Family Data Sheet](https://ww1.microchip.com/downloads/en/DeviceDoc/39927c.pdf)
 
-Basic Project Descriptions:
+# Author
+* [Garth Slaney](https://github.com/GarthS1)
+* [Viet Long Ta](https://github.com/longtv2222)
+* [Weitao Wu](https://github.com/VictorWu00)
+
+# Project Descriptions:
 
 Driver Project 2: When push button one pressed blink light at 1-sec intervals, push-button two pressed blink light at 2-sec intervals, push-button three pressed blink light at 3-sec intervals, more then two pushed light stays on and if nothing is pushed light stays off. 
 
